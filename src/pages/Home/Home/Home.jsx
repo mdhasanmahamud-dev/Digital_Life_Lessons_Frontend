@@ -1,8 +1,13 @@
 import React from 'react'
+import Banner from '../Banner/Banner'
+import WhyLearning from '../WhyLearning/WhyLearning'
 
 const Home = () => {
   return (
-    <div>This is Home ll jj</div>
+    <div>
+      <Banner/>
+      <WhyLearning/>
+    </div>
   )
 }
 

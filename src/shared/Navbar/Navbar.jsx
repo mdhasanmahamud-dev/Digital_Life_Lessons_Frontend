@@ -4,8 +4,10 @@ import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import MobileNavbar from "./MobileNavbar";
 import NavLogo from "../../assets/NavLogo.png"
+import useUserHook from "../../hooks/useUserHook";
 const Navbar = () => {
-  
+  const {user} = useUserHook()
+  console.log(user)
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const closeMenu = () => setShowMobileMenu(false)
 
