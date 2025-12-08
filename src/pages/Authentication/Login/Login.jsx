@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router";
+import useUserHook from "../../../hooks/useUserHook";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { userloading, loginUser, signInWithGoogle } = useUserHook();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -17,13 +19,28 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      const result = await loginUser(data.email, data.password);
+      console.log(result.user);
+      reset()
+      navigate(from, { replace: true });
     } catch (error) {
-      console.error("Login Error:", error);
+      console.error(error);
     }
   };
+
+  const handleLoginGoogle = async () => {
+    try {
+      const result = await signInWithGoogle();
+      if (result) {
+        navigate(from, { replace: true });
+      }
+    } catch (error) {
+      console.error("Google login error:", error);
+    }
+  };
+  
   return (
     <div className="flex justify-center items-center  py-10 px-7 ">
       <div className="bg-white rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300">
@@ -83,7 +100,7 @@ const Login = () => {
             type="submit"
             className="font-playfair w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
           >
-           Login
+            {userloading ? "Logging....." : "Login Now"}
           </button>
 
           {/* Divider */}
@@ -95,6 +112,7 @@ const Login = () => {
 
           {/* Google Button */}
           <button
+            onClick={handleLoginGoogle}
             type="button"
             className="w-full flex items-center justify-center gap-2 border border-blue-300 py-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
           >

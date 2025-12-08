@@ -3,9 +3,12 @@ import { FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import useUserHook from "../../../hooks/useUserHook";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+   const { userloading, createUser, signInWithGoogle, updateUser } =
+    useUserHook();
   const navigate = useNavigate();
   const {
     register,
@@ -14,11 +17,32 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+    // Submit handler
   const onSubmit = async (data) => {
     try {
-        console.log(data)
+      const result = await createUser(data.email, data.password);
+      console.log(result.user);
+      if (result.user) {
+        await updateUser({
+          displayName: data.name,
+          photoURL: data.photo,
+        });
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  };
+
+    //Handle Login with google
+  const handleSignUpGoogle = async () => {
+    try {
+      const result = await signInWithGoogle();
+      if (result) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("Google SignUp error:", error);
     }
   };
 
@@ -90,7 +114,7 @@ const Register = () => {
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer"
           >
-            Register
+            {userloading ? "Registering..." : "Register Now"}
           </button>
 
           {/* Divider */}
@@ -102,6 +126,7 @@ const Register = () => {
 
           {/* Google Button */}
           <button
+          onClick={handleSignUpGoogle}
             type="button"
             className="w-full flex items-center justify-center gap-2 border border-blue-300 py-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
           >
