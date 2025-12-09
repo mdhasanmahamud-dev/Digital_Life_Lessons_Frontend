@@ -7,7 +7,7 @@ import useUserHook from "../../../hooks/useUserHook";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-   const { userloading, createUser, signInWithGoogle, updateUser } =
+  const { userloading, createUser, signInWithGoogle, updateUser } =
     useUserHook();
   const navigate = useNavigate();
   const {
@@ -17,7 +17,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-    // Submit handler
+  // Submit handler
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data.email, data.password);
@@ -34,7 +34,7 @@ const Register = () => {
     }
   };
 
-    //Handle Login with google
+  //Handle Login with google
   const handleSignUpGoogle = async () => {
     try {
       const result = await signInWithGoogle();
@@ -92,11 +92,24 @@ const Register = () => {
             </label>
             <div className="relative">
               <input
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                    message:
+                      "Password must include at least 1 uppercase & 1 lowercase letter",
+                  },
+                })}
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
+                autoComplete="current-password"
                 className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
               />
+
               <span
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-2.5 text-gray-500 cursor-pointer"
@@ -104,8 +117,11 @@ const Register = () => {
                 {showPassword ? <FaEyeSlash /> : <IoEyeOutline />}
               </span>
             </div>
+
             {errors.password && (
-              <span className="text-red-500 text-sm">Password is required</span>
+              <span className="text-red-500 text-sm">
+                {errors.password.message}
+              </span>
             )}
           </div>
 
@@ -126,7 +142,7 @@ const Register = () => {
 
           {/* Google Button */}
           <button
-          onClick={handleSignUpGoogle}
+            onClick={handleSignUpGoogle}
             type="button"
             className="w-full flex items-center justify-center gap-2 border border-blue-300 py-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
           >

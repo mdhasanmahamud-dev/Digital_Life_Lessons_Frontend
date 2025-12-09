@@ -19,11 +19,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-   const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     try {
       const result = await loginUser(data.email, data.password);
       console.log(result.user);
-      reset()
+      reset();
       navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
@@ -40,7 +40,7 @@ const Login = () => {
       console.error("Google login error:", error);
     }
   };
-  
+
   return (
     <div className="flex justify-center items-center  py-10 px-7 ">
       <div className="bg-white rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300">
@@ -75,12 +75,24 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
-                {...register("password", { required: "Password is required" })}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
+                    message:
+                      "Password must include at least 1 uppercase & 1 lowercase letter",
+                  },
+                })}
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
                 autoComplete="current-password"
                 className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
               />
+
               <span
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-2.5 text-gray-500 cursor-pointer"
@@ -88,6 +100,7 @@ const Login = () => {
                 {showPassword ? <FaEyeSlash /> : <IoEyeOutline />}
               </span>
             </div>
+
             {errors.password && (
               <span className="text-red-500 text-sm">
                 {errors.password.message}
