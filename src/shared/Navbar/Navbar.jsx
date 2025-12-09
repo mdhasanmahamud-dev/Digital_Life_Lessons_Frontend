@@ -3,13 +3,15 @@ import { CiMenuFries } from "react-icons/ci";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import MobileNavbar from "./MobileNavbar";
-import NavLogo from "../../assets/NavLogo.png"
+import NavLogo from "../../assets/NavLogo.png";
 import useUserHook from "../../hooks/useUserHook";
+import ProfileDropDown from "./ProfileDropDown";
 const Navbar = () => {
-  const {user} = useUserHook()
-  console.log(user)
+  const { user, logOutUser } = useUserHook();
+  console.log(user);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const closeMenu = () => setShowMobileMenu(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setShowMobileMenu(false);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -46,27 +48,62 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <NavLink
-          to="/login"
-          className="px-4 py-2 border bg-indigo-600 text-white  rounded hover:bg-indigo-700 transition-colors hidden md:flex"
-        >
-          Login
-        </NavLink>
+        {user ? (
+          <div className="relative hidden md:block">
+            <div
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 border border-neutral-300 flex items-center gap-2 rounded-full cursor-pointer hover:shadow-md transition"
+            >
+              {/* Avatar */}
+              <img
+                className="rounded-full h-8 w-8"
+                src={user.photoURL ? user.photoURL : "avatarImg"}
+                alt="profile"
+              />
+            </div>
 
-        <div className="md:hidden">
-          <button
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            className="text-2xl text-gray-800 focus:outline-none cursor-pointer"
+            {/* Dropdown Menu */}
+            {isOpen && <ProfileDropDown />}
+          </div>
+        ) : (
+          <NavLink
+            to="/login"
+            className="px-4 py-2 border bg-indigo-600 text-white rounded hover:bg-indigo-700 hidden md:flex"
           >
-            {showMobileMenu ? <RxCross2 /> : <CiMenuFries />}
-          </button>
-        </div>
-
-       
-      </div>
-       {showMobileMenu && (
-          <MobileNavbar navItems={navItems} closeMenu={closeMenu} />
+            Login
+          </NavLink>
         )}
+
+        <div className="md:hidden relative">
+          <div className="flex items-center gap-2">
+            <div
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 border border-neutral-300 flex items-center gap-2 rounded-full cursor-pointer hover:shadow-md transition"
+            >
+              <img
+                className="rounded-full h-8 w-8"
+                src={user.photoURL ? user.photoURL : "avatarImg"}
+                alt="profile"
+              />
+            </div>
+
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="text-2xl text-gray-800 focus:outline-none cursor-pointer"
+            >
+              {showMobileMenu ? <RxCross2 /> : <CiMenuFries />}
+            </button>
+          </div>
+
+          {/* Mobile Profile Dropdown */}
+          {isOpen && (
+           <ProfileDropDown/>
+          )}
+        </div>
+      </div>
+      {showMobileMenu && (
+        <MobileNavbar navItems={navItems} closeMenu={closeMenu} />
+      )}
     </header>
   );
 };
