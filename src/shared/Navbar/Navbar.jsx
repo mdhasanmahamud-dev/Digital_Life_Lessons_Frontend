@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: "Add Lesson", path: "/add-lession" },
     { name: "My Lession", path: "/my-lession" },
     { name: "Public Lession", path: "/public-lession" },
+    { name: "Upgrade ", path: "/upgrade" },
     { name: "My Favorites", path: "/my-favorites" },
   ];
 
@@ -57,7 +58,7 @@ const Navbar = () => {
               {/* Avatar */}
               <img
                 className="rounded-full h-8 w-8"
-                src={user.photoURL ? user.photoURL : "avatarImg"}
+                src={user?.photoURL ? user?.photoURL : "avatarImg"}
                 alt="profile"
               />
             </div>
@@ -82,7 +83,7 @@ const Navbar = () => {
             >
               <img
                 className="rounded-full h-8 w-8"
-                src={user.photoURL ? user.photoURL : "avatarImg"}
+                src={user?.photoURL ? user?.photoURL : "avatarImg"}
                 alt="profile"
               />
             </div>
