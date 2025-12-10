@@ -4,11 +4,14 @@ import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useUserHook from "../../../hooks/useUserHook";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { userloading, createUser, signInWithGoogle, updateUser } =
     useUserHook();
+
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const {
     register,
@@ -27,6 +30,15 @@ const Register = () => {
           displayName: data.name,
           photoURL: data.photo,
         });
+
+        // Save user to the database
+        const saveUser = {
+          name: data.name,
+          email: data.email,
+          photoURL: data.photo,
+        };
+        await axiosSecure.post("/user", saveUser);
+        reset();
         navigate("/");
       }
     } catch (error) {
@@ -37,8 +49,17 @@ const Register = () => {
   //Handle Login with google
   const handleSignUpGoogle = async () => {
     try {
-      const result = await signInWithGoogle();
-      if (result) {
+      const user = await signInWithGoogle();
+
+      if (user) {
+        // Save user to the database
+        const saveUser = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        };
+
+        await axiosSecure.post("/user", saveUser);
         navigate("/");
       }
     } catch (error) {
@@ -124,7 +145,23 @@ const Register = () => {
               </span>
             )}
           </div>
-
+          {/* Photo URL */}
+          <div>
+            <label className="block dark:text-gray-300 font-medium mb-1">
+              Photo URL
+            </label>
+            <input
+              {...register("photo", { required: "Full Name is required" })}
+              type="text"
+              placeholder="Enter your full name"
+              className={`w-full px-4 py-2 border-b border-gray-600 bg-transparent focus:outline-none focus:border-indigo-500 transition ${
+                errors.photo ? "border-red-500" : ""
+              }`}
+            />
+            {errors.photo && (
+              <p className="text-red-400 text-sm">{errors.photo.message}</p>
+            )}
+          </div>
           {/* Register Button */}
           <button
             type="submit"

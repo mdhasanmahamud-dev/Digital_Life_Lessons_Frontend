@@ -5,6 +5,10 @@ import Home from "../pages/Home/Home/Home";
 import Register from "../pages/Authentication/Register/Register";
 import Upgrade from "../pages/Upgrade/Upgrade/Upgrade";
 import PublicLessons from "../pages/PublicLessons/PublicLessons/PublicLessons";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../dashboard/Dashboard/DashboardHome";
+import AddLesson from "../pages/AddLesson/AddLesson/AddLesson";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +34,24 @@ const router = createBrowserRouter([
       {
         path: "/public-lession",
         element: <PublicLessons />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: "add-lesson",
+        element: (
+          <PrivateRoute>
+            <AddLesson />
+          </PrivateRoute>
+        ),
       },
     ],
   },

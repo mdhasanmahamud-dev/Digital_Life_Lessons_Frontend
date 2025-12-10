@@ -8,14 +8,13 @@ import useUserHook from "../../hooks/useUserHook";
 import ProfileDropDown from "./ProfileDropDown";
 const Navbar = () => {
   const { user, logOutUser } = useUserHook();
-  console.log(user);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setShowMobileMenu(false);
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Add Lesson", path: "/add-lession" },
+    { name: "Add Lesson", path: "/dashboard/add-lesson" },
     { name: "My Lession", path: "/my-lession" },
     { name: "Public Lession", path: "/public-lession" },
     { name: "Upgrade ", path: "/upgrade" },
@@ -97,9 +96,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Profile Dropdown */}
-          {isOpen && (
-           <ProfileDropDown/>
-          )}
+          {isOpen && <ProfileDropDown />}
         </div>
       </div>
       {showMobileMenu && (
