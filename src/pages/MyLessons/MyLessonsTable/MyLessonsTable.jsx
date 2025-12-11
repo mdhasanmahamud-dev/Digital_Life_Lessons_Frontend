@@ -4,6 +4,7 @@ import useUserHook from "../../../hooks/useUserHook";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import useLessonHook from "../../../hooks/useLessonHook";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router";
 
 const MyLessonsTable = () => {
   const { user: firebaseUser } = useUserHook();
@@ -18,7 +19,7 @@ const MyLessonsTable = () => {
     queryKey: ["myLessons", firebaseUser?.email],
     queryFn: async () => {
       if (!firebaseUser?.email) return [];
-      const res = await axiosSecure.get(`/lessons/${firebaseUser.email}`);
+      const res = await axiosSecure.get(`/lessons/user/${firebaseUser.email}`);
       return res.data.lessons || [];
     },
     enabled: !!firebaseUser?.email,
@@ -83,7 +84,7 @@ const MyLessonsTable = () => {
                     <td className="p-4">
                       <div className="inline-flex items-center gap-2">
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium border ${
+                          className={`px-2 py-1 capitalize rounded-full text-xs font-medium border ${
                             lesson.privacy === "public"
                               ? "bg-emerald-100/10 text-emerald-300 border-emerald-700"
                               : "bg-sky-100/8 text-sky-300 border-sky-700"
@@ -103,7 +104,7 @@ const MyLessonsTable = () => {
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium border ${
+                          className={`px-2 py-1 rounded-full capitalize text-xs font-medium border ${
                             lesson.accessLevel === "premium"
                               ? "bg-amber-100/5 text-amber-300 border-amber-700"
                               : "bg-emerald-100/10 text-emerald-300 border-emerald-700"
@@ -126,9 +127,11 @@ const MyLessonsTable = () => {
                           Details
                         </button>
 
-                        <button className="px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-sm font-medium">
-                          Edit
-                        </button>
+                        <NavLink to={`/dashboard/edit-lession/${lesson._id}`}>
+                          <button className="px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-sm font-medium cursor-pointer">
+                            Edit
+                          </button>
+                        </NavLink>
 
                         <button
                           onClick={() => handleDelete(lesson._id)}

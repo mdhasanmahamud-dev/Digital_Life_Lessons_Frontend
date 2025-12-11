@@ -11,6 +11,7 @@ import AddLesson from "../pages/AddLesson/AddLesson/AddLesson";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/Profile/Profile";
 import MyLessons from "../pages/MyLessons/MyLessons/MyLessons";
+import EditLessons from "../pages/MyLessons/EditLessons/EditLessons";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyLessons/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "edit-lession/:id",
+        element: (
+          <PrivateRoute>
+            <EditLessons/>
           </PrivateRoute>
         ),
       },
