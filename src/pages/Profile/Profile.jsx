@@ -44,6 +44,7 @@ const Profile = () => {
     enabled: !!firebaseUser?.email,
   });
 
+  console.log(lessonCountData)
   if (isLoading || countLoading || lessonLoading) return <LoadingSpinner />;
 
   return (
