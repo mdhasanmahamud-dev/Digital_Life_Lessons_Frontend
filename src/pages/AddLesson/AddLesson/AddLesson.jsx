@@ -14,6 +14,7 @@ function AddLesson() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    data.createdAt = new Date();
     data.creator = {
       name: user?.displayName || user?.name,
       photoURL: user?.photoURL,
@@ -125,8 +126,8 @@ function AddLesson() {
               })}
               className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
             >
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
             </select>
             {errors.privacy && (
               <p className="text-red-500 text-sm mt-1">

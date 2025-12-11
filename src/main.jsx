@@ -5,13 +5,11 @@ import { RouterProvider } from "react-router";
 import router from "./routes/Routes";
 import AuthProvider from "./context/AuthProvider";
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import ToastProvider from "./components/ToastProvider";
+import LessonsProvider from "./context/LessonsProvider";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +17,10 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />
-        <ToastProvider />
+        <LessonsProvider>
+          <RouterProvider router={router} />
+          <ToastProvider />
+        </LessonsProvider>
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>

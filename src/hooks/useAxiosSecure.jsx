@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import axios from "axios";
 import useUserHook from "./useUserHook";
 
@@ -10,7 +9,7 @@ const axiosInstance = axios.create({
 
 const useAxiosSecure = () => {
   const { user, logOut, loading } = useUserHook();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     if (!loading && user?.accessToken) {
@@ -32,7 +31,7 @@ const useAxiosSecure = () => {
                 console.log("Logged out successfully.");
               })
               .catch(console.error);
-            navigate("/login");
+            //navigate("/login");
           }
           return Promise.reject(err);
         }
@@ -44,7 +43,7 @@ const useAxiosSecure = () => {
         axiosInstance.interceptors.response.eject(responseInterceptor);
       };
     }
-  }, [user, loading, logOut, navigate]);
+  }, [user, loading, logOut]);
 
   return axiosInstance;
 };

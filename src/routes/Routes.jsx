@@ -9,6 +9,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import DashboardHome from "../dashboard/Dashboard/DashboardHome";
 import AddLesson from "../pages/AddLesson/AddLesson/AddLesson";
 import PrivateRoute from "./PrivateRoute";
+import Profile from "../pages/Profile/Profile";
+import MyLessons from "../pages/MyLessons/MyLessons/MyLessons";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddLesson />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <Profile/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-lession",
+        element: (
+          <PrivateRoute>
+            <MyLessons/>
           </PrivateRoute>
         ),
       },

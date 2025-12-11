@@ -10,7 +10,9 @@ const Navbar = () => {
   const { user, logOutUser } = useUserHook();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
   const closeMenu = () => setShowMobileMenu(false);
+  const closeProfile = () => setShowMobileMenu(false);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -96,7 +98,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Profile Dropdown */}
-          {isOpen && <ProfileDropDown />}
+          {isOpen && <ProfileDropDown closeProfile/>}
         </div>
       </div>
       {showMobileMenu && (

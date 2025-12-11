@@ -2,13 +2,14 @@ import React from "react";
 import { NavLink } from "react-router";
 import useUserHook from "../../hooks/useUserHook";
 
-const ProfileDropDown = () => {
-  const { user, logOutUser } = useUserHook();
+const ProfileDropDown = ({closeProfile}) => {
+  const {logOutUser } = useUserHook();
   return (
     <div className="absolute right-0 mt-3 w-40 bg-white shadow-lg rounded-lg py-2 px-2 z-50 font-playfair">
       <NavLink
-        to="/profile"
+        to="/dashboard/my-profile"
         className="block px-4 py-2 hover:bg-gray-100 border-b"
+        onClick={closeProfile}
       >
         My Profile
       </NavLink>
@@ -16,6 +17,7 @@ const ProfileDropDown = () => {
       <NavLink
         to="/dashboard"
         className="block px-4 py-2 hover:bg-gray-100 border-b"
+        onClick={closeProfile}
       >
         Dashboard
       </NavLink>
