@@ -58,91 +58,99 @@ const MyLessonsTable = () => {
               </thead>
 
               <tbody className="text-sm">
-                {lessons?.map((lesson, index) => (
-                  <tr
-                    key={lesson._id}
-                    className="border-t border-slate-800 hover:bg-slate-900/40"
-                  >
-                    {/* Serial with black circle */}
-                    <td className="p-4 align-top">
-                      <span className="inline-flex items-center gap-2">
-                        <span className="text-slate-300">{index + 1}</span>
-                      </span>
-                    </td>
-
-                    {/* Title & description */}
-                    <td className="p-4">
-                      <div className="font-medium text-slate-100">
-                        {lesson.title}
-                      </div>
-                      <div className="text-xs text-slate-400 mt-1">
-                        {lesson.description}
-                      </div>
-                    </td>
-
-                    {/* Visibility */}
-                    <td className="p-4">
-                      <div className="inline-flex items-center gap-2">
-                        <span
-                          className={`px-2 py-1 capitalize rounded-full text-xs font-medium border ${
-                            lesson.privacy === "public"
-                              ? "bg-emerald-100/10 text-emerald-300 border-emerald-700"
-                              : "bg-sky-100/8 text-sky-300 border-sky-700"
-                          }`}
-                        >
-                          {lesson.privacy}
+                {lessons && lessons.length > 0 ? (
+                  lessons?.map((lesson, index) => (
+                    <tr
+                      key={lesson._id}
+                      className="border-t border-slate-800 hover:bg-slate-900/40"
+                    >
+                      {/* Serial with black circle */}
+                      <td className="p-4 align-top">
+                        <span className="inline-flex items-center gap-2">
+                          <span className="text-slate-300">{index + 1}</span>
                         </span>
+                      </td>
 
-                        <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
-                          <option value="public">Public</option>
-                          <option value="private">Private</option>
-                        </select>
-                      </div>
-                    </td>
+                      {/* Title & description */}
+                      <td className="p-4">
+                        <div className="font-medium text-slate-100">
+                          {lesson.title}
+                        </div>
+                        <div className="text-xs text-slate-400 mt-1">
+                          {lesson.description}
+                        </div>
+                      </td>
 
-                    {/* Access Level */}
-                    <td className="p-4">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`px-2 py-1 rounded-full capitalize text-xs font-medium border ${
-                            lesson.accessLevel === "premium"
-                              ? "bg-amber-100/5 text-amber-300 border-amber-700"
-                              : "bg-emerald-100/10 text-emerald-300 border-emerald-700"
-                          }`}
-                        >
-                          {lesson.accessLevel}
-                        </span>
+                      {/* Visibility */}
+                      <td className="p-4">
+                        <div className="inline-flex items-center gap-2">
+                          <span
+                            className={`px-2 py-1 capitalize rounded-full text-xs font-medium border ${
+                              lesson.privacy === "public"
+                                ? "bg-emerald-100/10 text-emerald-300 border-emerald-700"
+                                : "bg-sky-100/8 text-sky-300 border-sky-700"
+                            }`}
+                          >
+                            {lesson.privacy}
+                          </span>
 
-                        <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
-                          <option value="free">Free</option>
-                          <option value="premium">Premium</option>
-                        </select>
-                      </div>
-                    </td>
+                          <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                          </select>
+                        </div>
+                      </td>
 
-                    {/* Action Buttons */}
-                    <td className="p-4">
-                      <div className="flex flex-wrap gap-2">
-                        <button className="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200 text-sm">
-                          Details
-                        </button>
+                      {/* Access Level */}
+                      <td className="p-4">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`px-2 py-1 rounded-full capitalize text-xs font-medium border ${
+                              lesson.accessLevel === "premium"
+                                ? "bg-amber-100/5 text-amber-300 border-amber-700"
+                                : "bg-emerald-100/10 text-emerald-300 border-emerald-700"
+                            }`}
+                          >
+                            {lesson.accessLevel}
+                          </span>
 
-                        <NavLink to={`/dashboard/edit-lession/${lesson._id}`}>
-                          <button className="px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-sm font-medium cursor-pointer">
-                            Edit
+                          <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
+                            <option value="free">Free</option>
+                            <option value="premium">Premium</option>
+                          </select>
+                        </div>
+                      </td>
+
+                      {/* Action Buttons */}
+                      <td className="p-4">
+                        <div className="flex flex-wrap gap-2">
+                          <button className="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200 text-sm">
+                            Details
                           </button>
-                        </NavLink>
 
-                        <button
-                          onClick={() => handleDelete(lesson._id)}
-                          className="px-3 py-1 rounded-md bg-rose-600 text-white text-sm cursor-pointer"
-                        >
-                          Delete
-                        </button>
-                      </div>
+                          <NavLink to={`/dashboard/edit-lession/${lesson._id}`}>
+                            <button className="px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-sm font-medium cursor-pointer">
+                              Edit
+                            </button>
+                          </NavLink>
+
+                          <button
+                            onClick={() => handleDelete(lesson._id)}
+                            className="px-3 py-1 rounded-md bg-rose-600 text-white text-sm cursor-pointer"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="text-center py-6 text-gray-400">
+                      No lessons found. Start creating your first lesson!
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
