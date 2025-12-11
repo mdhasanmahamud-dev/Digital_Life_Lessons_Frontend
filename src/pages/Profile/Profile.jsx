@@ -3,6 +3,7 @@ import useUserHook from "../../hooks/useUserHook";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import ProfilePublicLesson from "./ProfilePublicLesson";
 
 const Profile = () => {
   const { user: firebaseUser } = useUserHook();
@@ -29,7 +30,21 @@ const Profile = () => {
     enabled: !!firebaseUser?.email,
   });
 
-  if (isLoading || countLoading) return <LoadingSpinner />;
+  //------------------------Fetch Lessons data by email------------------------------//
+  const { data: lessonData, isLoading: lessonLoading } = useQuery({
+    queryKey: ["lessonData", firebaseUser?.email],
+    queryFn: async () => {
+      if (!firebaseUser?.email) return [];
+
+      const res = await axiosSecure.get(
+        `/lessons/public/${firebaseUser.email}`
+      );
+      return res.data.lessons;
+    },
+    enabled: !!firebaseUser?.email,
+  });
+
+  if (isLoading || countLoading || lessonLoading) return <LoadingSpinner />;
 
   return (
     <div className="min-h-screen bg-slate-950 p-6 text-white">
@@ -72,58 +87,20 @@ const Profile = () => {
           </div>
 
           <div className="bg-slate-800 p-6 rounded-xl text-center border border-gray-700 hover:border-yellow-400 transition">
-            <h3 className="text-3xl font-bold text-yellow-300">Premium</h3>
+            <h3
+              className={`text-3xl font-bold ${
+                userData?.isPremium ? "text-yellow-300" : "text-gray-300"
+              }`}
+            >
+              {userData?.isPremium ? "Premium" : "Free"}
+            </h3>
             <p className="text-gray-400 font-semibold mt-1">Plan Status</p>
           </div>
         </div>
 
         {/* Public Lessons Section */}
         <h3 className="text-2xl font-bold mt-10 mb-4">All Public Lessons</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-slate-800 shadow border border-gray-700 rounded-xl p-5 hover:border-blue-500 transition">
-            <h4 className="text-xl font-semibold">
-              How to Stay Focused in Life
-            </h4>
-            <p className="text-gray-400 mt-2 text-sm">
-              A short lesson about staying disciplined in work and study.
-            </p>
-            <span className="text-xs px-2 py-1 bg-blue-700 rounded mt-2 inline-block">
-              Personal Growth
-            </span>
-          </div>
-
-          <div className="bg-slate-800 shadow border border-gray-700 rounded-xl p-5 hover:border-blue-500 transition">
-            <h4 className="text-xl font-semibold">
-              Importance of Digital Learning
-            </h4>
-            <p className="text-gray-400 mt-2 text-sm">
-              Why digital skills are essential for the modern world.
-            </p>
-            <span className="text-xs px-2 py-1 bg-blue-700 rounded mt-2 inline-block">
-              Career
-            </span>
-          </div>
-
-          <div className="bg-slate-800 shadow border border-gray-700 rounded-xl p-5 hover:border-blue-500 transition">
-            <h4 className="text-xl font-semibold">Career Growth Tips</h4>
-            <p className="text-gray-400 mt-2 text-sm">
-              Improve your personal and professional life with small habits.
-            </p>
-            <span className="text-xs px-2 py-1 bg-blue-700 rounded mt-2 inline-block">
-              Career
-            </span>
-          </div>
-
-          <div className="bg-slate-800 shadow border border-gray-700 rounded-xl p-5 hover:border-blue-500 transition">
-            <h4 className="text-xl font-semibold">Healthy Digital Habits</h4>
-            <p className="text-gray-400 mt-2 text-sm">
-              Maintain balance while using technology every day.
-            </p>
-            <span className="text-xs px-2 py-1 bg-blue-700 rounded mt-2 inline-block">
-              Mindset
-            </span>
-          </div>
-        </div>
+        <ProfilePublicLesson lessonData={lessonData} />
       </div>
     </div>
   );
