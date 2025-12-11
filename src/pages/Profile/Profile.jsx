@@ -16,10 +16,9 @@ const Profile = () => {
     },
     enabled: !!firebaseUser?.email,
   });
-
-  const isPemium = true;
+  
   if (isLoading) return <LoadingSpinner />;
-  console.log(userData);
+  console.log(userData?.isPremium);
   return (
     <div className="min-h-screen bg-slate-950 p-6 text-white">
       <div className="max-w-5xl mx-auto bg-slate-900 p-8 rounded-2xl hover:shadow-xl hover:shadow-slate-900 border border-gray-700">
@@ -33,7 +32,7 @@ const Profile = () => {
           <div className="flex-1">
             <h2 className="text-3xl font-bold flex items-center gap-3">
               {userData?.name || "User Name"}
-              {isPemium && (
+              {userData?.isPremium === true && (
                 <p className=" bg-yellow-500 text-black text-sm font-semibold px-3 py-1 rounded-full flex items-center justify-between gap-2">
                   <FaRegStar size={20} className="text-red-600" /> Premium User
                 </p>
