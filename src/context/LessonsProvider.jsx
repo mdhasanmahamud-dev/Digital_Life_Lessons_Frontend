@@ -17,6 +17,8 @@ const LessonsProvider = ({ children }) => {
       return response
     } catch (error) {}
   };
+
+  
   const lessonValue = { deleteLesson };
   return (
     <LessonsContext.Provider value={lessonValue}>

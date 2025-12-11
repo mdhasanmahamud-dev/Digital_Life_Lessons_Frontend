@@ -7,6 +7,8 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 const Profile = () => {
   const { user: firebaseUser } = useUserHook();
   const axiosSecure = useAxiosSecure();
+
+  //------------------------User data fetch--------------------------------//
   const { data: userData, isLoading } = useQuery({
     queryKey: ["user", firebaseUser?.email],
     queryFn: async () => {
@@ -16,9 +18,19 @@ const Profile = () => {
     },
     enabled: !!firebaseUser?.email,
   });
-  
-  if (isLoading) return <LoadingSpinner />;
-  console.log(userData?.isPremium);
+
+  //------------------------Lessons data count fetch--------------------------------//
+  const { data: lessonCountData, isLoading: countLoading } = useQuery({
+    queryKey: ["lessonCount", firebaseUser?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/lessons/count/${firebaseUser.email}`);
+      return res.data.count;
+    },
+    enabled: !!firebaseUser?.email,
+  });
+
+  if (isLoading || countLoading) return <LoadingSpinner />;
+
   return (
     <div className="min-h-screen bg-slate-950 p-6 text-white">
       <div className="max-w-5xl mx-auto bg-slate-900 p-8 rounded-2xl hover:shadow-xl hover:shadow-slate-900 border border-gray-700">
@@ -48,7 +60,9 @@ const Profile = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6">
           <div className="bg-slate-800 p-6 rounded-xl text-center border border-gray-700 hover:border-green-500 transition">
-            <h3 className="text-3xl font-bold text-white">12</h3>
+            <h3 className="text-3xl font-bold text-white">
+              {lessonCountData || 0}
+            </h3>
             <p className="text-gray-400 font-semibold mt-1">Lessons Created</p>
           </div>
 
