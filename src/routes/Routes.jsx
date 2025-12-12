@@ -12,6 +12,9 @@ import PrivateRoute from "./PrivateRoute";
 import Profile from "../pages/Profile/Profile";
 import MyLessons from "../pages/MyLessons/MyLessons/MyLessons";
 import EditLessons from "../pages/MyLessons/EditLessons/EditLessons";
+import Favorites from "../pages/Favorites/Favorites/Favorites";
+import LessonDetails from "../pages/LessonDetails/LessonDetails/LessonDetails";
+import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,14 @@ const router = createBrowserRouter([
         path: "/public-lession",
         element: <PublicLessons />,
       },
+      {
+        path: "/payment-success",
+        element: (
+          <PrivateRoute>
+            <PaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -60,7 +71,7 @@ const router = createBrowserRouter([
         path: "my-profile",
         element: (
           <PrivateRoute>
-            <Profile/>
+            <Profile />
           </PrivateRoute>
         ),
       },
@@ -68,7 +79,7 @@ const router = createBrowserRouter([
         path: "my-lession",
         element: (
           <PrivateRoute>
-            <MyLessons/>
+            <MyLessons />
           </PrivateRoute>
         ),
       },
@@ -76,7 +87,23 @@ const router = createBrowserRouter([
         path: "edit-lession/:id",
         element: (
           <PrivateRoute>
-            <EditLessons/>
+            <EditLessons />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "lession-details/:id",
+        element: (
+          <PrivateRoute>
+            <LessonDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "favorite-lession",
+        element: (
+          <PrivateRoute>
+            <Favorites />
           </PrivateRoute>
         ),
       },

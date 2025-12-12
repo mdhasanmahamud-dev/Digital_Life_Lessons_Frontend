@@ -11,7 +11,7 @@ const PublicLessonsCards = () => {
     queryKey: ["publicLessons"],
     queryFn: async () => {
       const res = await axiosSecure.get("/lessons");
-      return res.data.lessons; // <-- correct key
+      return res.data.lessons; 
     },
   });
 

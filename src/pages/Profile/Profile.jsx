@@ -4,21 +4,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ProfilePublicLesson from "./ProfilePublicLesson";
+import useLessonHook from "../../hooks/useLessonHook";
 
 const Profile = () => {
   const { user: firebaseUser } = useUserHook();
+  const {userData, isLoading} = useLessonHook()
   const axiosSecure = useAxiosSecure();
-
-  //------------------------User data fetch--------------------------------//
-  const { data: userData, isLoading } = useQuery({
-    queryKey: ["user", firebaseUser?.email],
-    queryFn: async () => {
-      if (!firebaseUser?.email) return null;
-      const res = await axiosSecure.get(`/user/${firebaseUser.email}`);
-      return res.data.user;
-    },
-    enabled: !!firebaseUser?.email,
-  });
 
   //------------------------Lessons data count fetch--------------------------------//
   const { data: lessonCountData, isLoading: countLoading } = useQuery({
@@ -44,7 +35,6 @@ const Profile = () => {
     enabled: !!firebaseUser?.email,
   });
 
-  console.log(lessonCountData)
   if (isLoading || countLoading || lessonLoading) return <LoadingSpinner />;
 
   return (

@@ -1,6 +1,9 @@
-import React from "react";
 import { BsCheckLg } from "react-icons/bs";
-
+import useUserHook from "../../../hooks/useUserHook";
+import { useLocation } from "react-router";
+import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useLessonHook from "../../../hooks/useLessonHook";
 // Feature Item Component (Static)
 const FeatureItem = ({ text }) => (
   <li className="flex items-center gap-2 text-gray-400">
@@ -31,6 +34,34 @@ const premiumFeatures = [
 ];
 
 const UpgradeCard = () => {
+  const { user } = useUserHook();
+  const { userData, isLoading } = useLessonHook();
+  const location = useLocation();
+
+  const axiosSecure = useAxiosSecure();
+  console.log(userData);
+  //....................HANDLER PREMIUM PAYMENT......................//
+  const handlePremiumPayment = async () => {
+    if (!user) {
+      toast.error("Please login first.");
+      return;
+    }
+
+    try {
+      const { data } = await axiosSecure.post("/create-checkout-session", {
+        email: user?.email,
+        name: user?.displayName,
+        photo: user?.photoURL,
+        uid: user?.uid,
+        price: 1500,
+      });
+      console.log(data.url);
+      window.location.href = data.url;
+    } catch (error) {
+      console.log(error);
+      toast.error("Payment request failed.");
+    }
+  };
   return (
     <div className=" py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6 max-w-4xl mx-auto">
@@ -40,7 +71,10 @@ const UpgradeCard = () => {
 
           <p className="text-4xl font-extrabold text-white mb-6">
             $0
-            <span className="text-base font-normal text-gray-100"> / month</span>
+            <span className="text-base font-normal text-gray-100">
+              {" "}
+              / month
+            </span>
           </p>
 
           {/* Action Button */}
@@ -72,15 +106,26 @@ const UpgradeCard = () => {
           <h3 className="text-2xl font-bold text-indigo-600 mb-2">Premium</h3>
 
           <p className="text-4xl font-extrabold  text-white mb-6">
-            $25
-            <span className="text-base font-normal text-gray-500"> / month</span>
+            $1500
+            <span className="text-base font-normal text-gray-500">
+              / Lifetime access
+            </span>
           </p>
 
           {/* Action Button */}
           <div className="mb-8">
-            <button className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 transition">
-              Upgrade to Premium
-            </button>
+            {userData?.isPremium ? (
+              <button className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 transition">
+                You are already a Premium Member
+              </button>
+            ) : (
+              <button
+                onClick={handlePremiumPayment}
+                className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 transition cursor-pointer"
+              >
+                Upgrade to Premium
+              </button>
+            )}
           </div>
 
           <h4 className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4 border-b pb-2">

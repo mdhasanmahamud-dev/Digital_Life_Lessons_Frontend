@@ -13,7 +13,7 @@ const Sidebar = () => {
     { name: "Dashboard", path: "/dashboard", icon: <FiHome /> },
     {name: "Add Lesson",path: "/dashboard/add-lesson",icon: <FiPlusCircle />,},
     { name: "My Lesson", path: "/dashboard/my-lession", icon: <FiBookOpen /> },
-    { name: "My Favorites", path: "/my-avorites", icon: <FiStar /> },
+    { name: "My Favorites", path: "/dashboard/favorite-lession", icon: <FiStar /> },
     { name: "Profile", path: "/dashboard/my-profile", icon: <FaUserAlt /> },
   ];
 

@@ -3,10 +3,12 @@ import { FaLock, FaUnlockAlt } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
 import { BsEmojiSmile } from "react-icons/bs";
 import { Link } from "react-router";
+import useLessonHook from "../../../hooks/useLessonHook";
 
-const PublicLessonsCard = ({ lesson, userAccess = "free" }) => {
+const PublicLessonsCard = ({ lesson }) => {
+  const { userData } = useLessonHook();
   const {
-    id,
+    _id,
     title,
     shortDescription,
     category,
@@ -16,17 +18,21 @@ const PublicLessonsCard = ({ lesson, userAccess = "free" }) => {
     accessLevel,
   } = lesson;
 
-  const isPremium = accessLevel === "premium";
-  const showUpgrade = isPremium && userAccess !== "premium";
+  // Lesson premium?
+  const isPremiumLesson = accessLevel === "premium";
+
+  // User premium?
+  const isUserPremium = userData?.isPremium === true;
+
+  // Should show upgrade button?
+  const showUpgrade = isPremiumLesson && !isUserPremium;
 
   return (
     <div className="relative bg-white rounded-2xl shadow-md p-6 border border-gray-200 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl">
       {/* Header Section */}
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-lg text-gray-700">
-          {isPremium ? <FaLock /> : <FaUnlockAlt />}
-        </span>
-      </div>
+      <span className="text-lg text-gray-700">
+        {isPremiumLesson ? <FaLock /> : <FaUnlockAlt />}
+      </span>
 
       {/* Title */}
       <h2 className="text-xl font-bold text-gray-900 leading-snug mb-2">
@@ -76,7 +82,7 @@ const PublicLessonsCard = ({ lesson, userAccess = "free" }) => {
         </Link>
       ) : (
         <Link
-          to={`/lessons/${id}`}
+          to={`/lessons/${_id}`}
           className="mt-auto text-center bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition"
         >
           View Details

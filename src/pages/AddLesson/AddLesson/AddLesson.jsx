@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import useUserHook from "../../../hooks/useUserHook";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router";
 function AddLesson() {
   const { user } = useUserHook();
   const axiosSecure = useAxiosSecure();
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,6 +26,7 @@ function AddLesson() {
 
     if (response.data.success) {
       toast.success(response.data.message);
+      navigate("/dashboard/my-lession")
     } else {
       toast.error(response.data.message);
     }

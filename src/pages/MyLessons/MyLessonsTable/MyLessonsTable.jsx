@@ -124,9 +124,12 @@ const MyLessonsTable = () => {
                       {/* Action Buttons */}
                       <td className="p-4">
                         <div className="flex flex-wrap gap-2">
-                          <button className="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200 text-sm">
+                          <NavLink
+                            to={`/dashboard/lession-details/${lesson._id}`}
+                            className="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200 text-sm"
+                          >
                             Details
-                          </button>
+                          </NavLink>
 
                           <NavLink to={`/dashboard/edit-lession/${lesson._id}`}>
                             <button className="px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-sm font-medium cursor-pointer">
