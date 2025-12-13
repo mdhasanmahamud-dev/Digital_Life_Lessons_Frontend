@@ -31,7 +31,7 @@ const PublicLessonsCard = ({ lesson }) => {
     <div className="relative bg-white rounded-2xl shadow-md p-6 border border-gray-200 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl">
       {/* Header Section */}
       <span className="text-lg text-gray-700">
-        {isPremiumLesson ? <FaLock /> : <FaUnlockAlt />}
+        {showUpgrade ? <FaLock /> : <FaUnlockAlt />}
       </span>
 
       {/* Title */}

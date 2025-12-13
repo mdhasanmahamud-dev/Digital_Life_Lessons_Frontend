@@ -17,7 +17,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Add Lesson", path: "/dashboard/add-lesson" },
-    { name: "My Lession", path: "/my-lession" },
+    { name: "My Lession", path: "/dashboard/my-lession" },
     { name: "Public Lession", path: "/public-lession" },
     { name: "Upgrade ", path: "/upgrade" },
     { name: "My Favorites", path: "/my-favorites" },
