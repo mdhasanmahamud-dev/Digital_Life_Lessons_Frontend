@@ -7,14 +7,18 @@ import LessonMetadata from "../LessonMetadata/LessonMetadata";
 import EngagementSection from "../EngagementSection/EngagementSection";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
-import useLessonHook from "../../../hooks/useLessonHook";
+import RecommendedLessons from "../RecommendedLessons/RecommendedLessons";
 
 const LessonDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
 
   // ------------------- Fetch Single Lesson ----------------------------//
-  const {data: lesson,isLoading,refetch} = useQuery({
+  const {
+    data: lesson,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["Lesson", id],
     enabled: !!id,
     queryFn: async () => {
@@ -30,11 +34,11 @@ const LessonDetails = () => {
     <div className="min-h-screen bg-slate-950 text-slate-200">
       <div className="max-w-6xl mx-auto px-4 py-14 space-y-14">
         <LessonInformation lesson={lesson} />
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Main */}
           <div className="lg:col-span-2 space-y-8">
             <InteractionButtons />
+            <RecommendedLessons lessonId={lesson?._id} />
           </div>
           {/* Sidebar */}
           <div className="space-y-6">
