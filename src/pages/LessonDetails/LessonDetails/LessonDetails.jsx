@@ -1,31 +1,49 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import useUserHook from "../../../hooks/useUserHook";
+import LessonInformation from "../LessonInformation/LessonInformation";
+import InteractionButtons from "../InteractionButtons/InteractionButtons";
+import CreatorSection from "../CreatorSection/CreatorSection";
+import LessonMetadata from "../LessonMetadata/LessonMetadata";
+import EngagementSection from "../EngagementSection/EngagementSection";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
-import LessonInformation from "../LessonInformation/LessonInformation";
+import useLessonHook from "../../../hooks/useLessonHook";
+
 const LessonDetails = () => {
-  const { user } = useUserHook();
-  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
-  const {
-    data: lesson,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["lessonDetails", id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/lessons/${id}`);
-      return res.data.lesson;
-    },
+  const axiosSecure = useAxiosSecure();
+
+  // ------------------- Fetch Single Lesson ----------------------------//
+  const {data: lesson,isLoading,refetch} = useQuery({
+    queryKey: ["Lesson", id],
     enabled: !!id,
+    queryFn: async () => {
+      if (!id) return [];
+      const res = await axiosSecure.get(`/lessons/${id}`);
+      return res?.data?.lesson;
+    },
   });
 
   if (isLoading) return <LoadingSpinner />;
-  console.log(lesson);
+
   return (
-    <div>
-      <LessonInformation lesson={lesson}/>
+    <div className="min-h-screen bg-slate-950 text-slate-200">
+      <div className="max-w-6xl mx-auto px-4 py-14 space-y-14">
+        <LessonInformation lesson={lesson} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* Main */}
+          <div className="lg:col-span-2 space-y-8">
+            <InteractionButtons />
+          </div>
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <CreatorSection lesson={lesson} />
+            <LessonMetadata lesson={lesson} />
+            <EngagementSection lesson={lesson} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

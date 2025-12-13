@@ -1,0 +1,30 @@
+import React from "react";
+import { FaHeart, FaBookmark, FaEye } from "react-icons/fa";
+
+const EngagementSection = () => {
+  // Sample stats data
+  const stats = {
+    likes: 120,
+    favorites: 45,
+    views: 530,
+  };
+
+  return (
+    <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+      <Stat icon={FaHeart} label="Likes" value={stats.likes} />
+      <Stat icon={FaBookmark} label="Favorites" value={stats.favorites} />
+      <Stat icon={FaEye} label="Views" value={stats.views} />
+    </div>
+  );
+};
+
+const Stat = ({ icon: Icon, label, value }) => (
+  <div className="flex justify-between items-center text-sm">
+    <span className="flex items-center gap-2 text-slate-400">
+      <Icon /> {label}
+    </span>
+    <span className="font-semibold text-white">{value}</span>
+  </div>
+);
+
+export default EngagementSection;

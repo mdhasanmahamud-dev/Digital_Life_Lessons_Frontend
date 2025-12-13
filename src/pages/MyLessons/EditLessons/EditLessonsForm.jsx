@@ -29,11 +29,7 @@ const EditLessonsForm = () => {
   });
 
   // ------------------- Fetch Single Lesson ----------------------------//
-  const {
-    data: lesson,
-    isLoading,
-    refetch,
-  } = useQuery({
+  const {data: lesson,isLoading,refetch,} = useQuery({
     queryKey: ["Lesson", id],
     queryFn: async () => {
       if (!id) return [];

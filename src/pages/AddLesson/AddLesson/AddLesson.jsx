@@ -15,7 +15,6 @@ function AddLesson() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    data.createdAt = new Date();
     data.creator = {
       name: user?.displayName || user?.name,
       photoURL: user?.photoURL,
