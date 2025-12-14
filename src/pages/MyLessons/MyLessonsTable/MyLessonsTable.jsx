@@ -125,7 +125,7 @@ const MyLessonsTable = () => {
                       <td className="p-4">
                         <div className="flex flex-wrap gap-2">
                           <NavLink
-                            to={`/dashboard/lession-details/${lesson._id}`}
+                            to={`/lession-details/${lesson._id}`}
                             className="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-200 text-sm"
                           >
                             Details

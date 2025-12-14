@@ -82,7 +82,7 @@ const PublicLessonsCard = ({ lesson }) => {
         </Link>
       ) : (
         <Link
-          to={`/dashboard/lession-details/${lesson._id}`}
+          to={`/lession-details/${lesson._id}`}
           className="mt-auto text-center bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition"
         >
           View Details

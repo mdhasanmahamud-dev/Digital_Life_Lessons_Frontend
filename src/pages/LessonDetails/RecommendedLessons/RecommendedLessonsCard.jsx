@@ -14,7 +14,7 @@ const RecommendedLessonsCard = ({ lesson }) => {
 
       {/* View Details Button */}
       <Link
-        to={`/dashboard/lession-details/${lesson._id}`}
+        to={`/lession-details/${lesson._id}`}
         className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
       >
         View Details

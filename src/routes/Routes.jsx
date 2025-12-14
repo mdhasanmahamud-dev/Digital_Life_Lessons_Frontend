@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <PageNotFound/>,
+    errorElement: <PageNotFound />,
     children: [
       {
         index: true,
@@ -44,6 +44,14 @@ const router = createBrowserRouter([
         element: <PublicLessons />,
       },
       {
+        path: "lession-details/:id",
+        element: (
+          <PrivateRoute>
+            <LessonDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/payment-success",
         element: (
           <PrivateRoute>
@@ -53,7 +61,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+
   {
     path: "/dashboard",
     element: <DashboardLayout />,
@@ -94,14 +102,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "lession-details/:id",
-        element: (
-          <PrivateRoute>
-            <LessonDetails />
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "favorite-lession",
         element: (
