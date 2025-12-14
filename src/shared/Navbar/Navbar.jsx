@@ -7,7 +7,7 @@ import NavLogo from "../../assets/NavLogo.png";
 import useUserHook from "../../hooks/useUserHook";
 import ProfileDropDown from "./ProfileDropDown";
 const Navbar = () => {
-  const { user, logOutUser } = useUserHook();
+  const { user } = useUserHook();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +20,6 @@ const Navbar = () => {
     { name: "My Lession", path: "/dashboard/my-lession" },
     { name: "Public Lession", path: "/public-lession" },
     { name: "Upgrade ", path: "/upgrade" },
-    { name: "My Favorites", path: "/my-favorites" },
   ];
 
   return (

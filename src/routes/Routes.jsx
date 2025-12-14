@@ -15,11 +15,13 @@ import EditLessons from "../pages/MyLessons/EditLessons/EditLessons";
 import Favorites from "../pages/Favorites/Favorites/Favorites";
 import LessonDetails from "../pages/LessonDetails/LessonDetails/LessonDetails";
 import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
+import PageNotFound from "../pages/PageNotFound/PageNotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <PageNotFound/>,
     children: [
       {
         index: true,
