@@ -6,13 +6,14 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PublicLessonsCards = () => {
   const axiosSecure = useAxiosSecure()
-  const { data: lessons = [], isLoading } = useQuery({
+  const { data: lessons = [], isLoading, refetch } = useQuery({
     queryKey: ["publicLessons"],
     queryFn: async () => {
       const res = await axiosSecure.get("/lessons");
       return res.data.lessons; 
     },
   });
+  
 
 
   if(isLoading) return <LoadingSpinner/>

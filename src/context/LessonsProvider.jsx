@@ -18,7 +18,33 @@ const LessonsProvider = ({ children }) => {
     },
     enabled: !!firebaseUser?.email,
   });
-  
+
+  //------------------------Lessons data count fetch--------------------------------//
+  const {
+    data: lessonCountData,
+    isLoading: countLoading,
+    refetch: lessonCountRefetch,
+  } = useQuery({
+    queryKey: ["lessonCount", firebaseUser?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/lessons/count/${firebaseUser.email}`);
+      return res.data.count;
+    },
+    enabled: !!firebaseUser?.email,
+  });
+
+  //------------------------Favorites data count fetch------------------------------//
+  const {data: favoriteCount,isLoading: favoriteCountLoading,refetch: favoriteCountRefetch,} = useQuery({
+    queryKey: ["favoriteCount", firebaseUser?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/favorites/count/${firebaseUser?.email}`
+      );
+      return res.data.count;
+    },
+    enabled: !!firebaseUser?.email,
+  });
+
   //....................Delete a lesson by id.........................//
   const deleteLesson = async (id) => {
     const confirmDelete = window.confirm(
@@ -33,7 +59,15 @@ const LessonsProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  const lessonValue = { userData, deleteLesson };
+  const lessonValue = {
+    countLoading,
+    userData,
+    lessonCountData,
+    favoriteCount,
+    lessonCountRefetch,
+    favoriteCountRefetch,
+    deleteLesson,
+  };
   return (
     <LessonsContext.Provider value={lessonValue}>
       {children}

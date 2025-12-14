@@ -20,10 +20,8 @@ const PublicLessonsCard = ({ lesson }) => {
 
   // Lesson premium?
   const isPremiumLesson = accessLevel === "premium";
-
   // User premium?
   const isUserPremium = userData?.isPremium === true;
-
   // Should show upgrade button?
   const showUpgrade = isPremiumLesson && !isUserPremium;
 

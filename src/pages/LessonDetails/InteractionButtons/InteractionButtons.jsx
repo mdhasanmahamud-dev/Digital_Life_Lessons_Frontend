@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FaBookmark, FaHeart, FaShareAlt, FaFlag } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserHook from "../../../hooks/useUserHook";
+import useLessonHook from "../../../hooks/useLessonHook";
 
 const InteractionButtons = ({ lessonId }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useUserHook();
+  const { favoriteCountRefetch } = useLessonHook();
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavorite = async () => {
@@ -17,10 +19,10 @@ const InteractionButtons = ({ lessonId }) => {
         lessonId,
         userEmail: user?.email,
       });
-
       // backend message capture
       if (response.data.success) {
-        toast.success(response.data.message); // Green success
+        toast.success(response.data.message); 
+        favoriteCountRefetch()
       }
     } catch (error) {
       const message = error?.response?.data?.message;

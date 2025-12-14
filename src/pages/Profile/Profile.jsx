@@ -8,18 +8,18 @@ import useLessonHook from "../../hooks/useLessonHook";
 
 const Profile = () => {
   const { user: firebaseUser } = useUserHook();
-  const {userData, isLoading} = useLessonHook()
+  const {userData, lessonCountData, isLoading, countLoading} = useLessonHook()
   const axiosSecure = useAxiosSecure();
 
   //------------------------Lessons data count fetch--------------------------------//
-  const { data: lessonCountData, isLoading: countLoading } = useQuery({
-    queryKey: ["lessonCount", firebaseUser?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/lessons/count/${firebaseUser.email}`);
-      return res.data.count;
-    },
-    enabled: !!firebaseUser?.email,
-  });
+  // const { data: lessonCountData, isLoading: countLoading } = useQuery({
+  //   queryKey: ["lessonCount", firebaseUser?.email],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/lessons/count/${firebaseUser.email}`);
+  //     return res.data.count;
+  //   },
+  //   enabled: !!firebaseUser?.email,
+  // });
 
   //------------------------Fetch Lessons data by email------------------------------//
   const { data: lessonData, isLoading: lessonLoading } = useQuery({

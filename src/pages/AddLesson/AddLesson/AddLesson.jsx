@@ -4,8 +4,10 @@ import useUserHook from "../../../hooks/useUserHook";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import useLessonHook from "../../../hooks/useLessonHook";
 function AddLesson() {
   const { user } = useUserHook();
+  const { lessonCountRefetch } = useLessonHook();
   const axiosSecure = useAxiosSecure();
   let navigate = useNavigate();
   const {
@@ -20,17 +22,16 @@ function AddLesson() {
       photoURL: user?.photoURL,
       email: user?.email,
     };
-
     const response = await axiosSecure.post("/lessons", data);
 
     if (response.data.success) {
       toast.success(response.data.message);
-      navigate("/dashboard/my-lession")
+      lessonCountRefetch();
+      navigate("/dashboard/my-lession");
     } else {
       toast.error(response.data.message);
     }
   };
-
   return (
     <div className="min-h-screen bg-slate-950 p-6">
       <div className="max-w-5xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-700">

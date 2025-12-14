@@ -1,12 +1,13 @@
 import { FiBook, FiHeart, FiClock, FiZap } from "react-icons/fi";
+import useLessonHook from "../../../hooks/useLessonHook";
 
-// UserOverview.jsx - Dashboard Home (User)
-// TailwindCSS ব্যবহার করা হয়েছে। কপি-পেস্ট করে project এ ব্যবহার করো।
 
 function UserOverview() {
+
+  const {lessonCountData, favoriteCount} = useLessonHook();
   const stats = [
-    { id: 1, label: "Total Lessons", value: 24, icon: <FiBook size={20} /> },
-    { id: 2, label: "Saved Lessons", value: 12, icon: <FiHeart size={20} /> },
+    { id: 1, label: "Total Lessons", value: lessonCountData, icon: <FiBook size={20} /> },
+    { id: 2, label: "Saved Lessons", value: favoriteCount, icon: <FiHeart size={20} /> },
     { id: 3, label: "Recent Activity", value: 5, icon: <FiClock size={20} /> },
     { id: 4, label: "Quick Actions", value: 4, icon: <FiZap size={20} /> },
   ];
@@ -37,7 +38,7 @@ function UserOverview() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-gray-400">{s.label}</p>
-                  <p className="text-2xl font-semibold text-white">{s.value}</p>
+                  <p className="text-2xl font-semibold text-white mt-2">{s.value}</p>
                 </div>
                 <div className="text-gray-400">{s.icon}</div>
               </div>
