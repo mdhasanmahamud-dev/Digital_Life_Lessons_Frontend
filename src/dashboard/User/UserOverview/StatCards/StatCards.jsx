@@ -20,10 +20,18 @@ const StatCards = () => {
   ];
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-      {stats.map((s) => (
+      {stats.map((s, index) => (
         <div
           key={s.id}
-          className="bg-slate-800 rounded-2xl p-4 shadow-sm border border-gray-700"
+          className={`bg-slate-800 rounded-2xl p-4 shadow-sm border ${
+            index === 0
+              ? "hover:border-yellow-500 transition-all duration-300 ease-in-out"
+              : index === 1
+              ? "hover:border-green-500 transition-all duration-300 ease-in-out"
+              : index === 2
+              ? "hover:border-blue-500 transition-all duration-300 ease-in-out"
+              : "border-gray-700"
+          }`}
         >
           <div className="flex items-center justify-between">
             <div>
