@@ -8,8 +8,9 @@ import { NavLink } from "react-router";
 
 const MyLessonsTable = () => {
   const { user: firebaseUser } = useUserHook();
-  const { deleteLesson } = useLessonHook();
+  const { deleteLesson, userData } = useLessonHook();
   const axiosSecure = useAxiosSecure();
+  console.log(userData);
 
   const {
     data: lessons,
@@ -36,6 +37,44 @@ const MyLessonsTable = () => {
       refetch();
     } else {
       toast.error("Failed to delete lesson");
+    }
+  };
+
+  //..............Handle visibility change a lesson from db by id..............//
+  const handleVisibilityChange = async (lessonId, newVisibility) => {
+    try {
+      const res = await axiosSecure.put(`/lessons/visibility/${lessonId}`, {
+        privacy: newVisibility,
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        refetch();
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      toast.error("Failed to update visibility");
+    }
+  };
+
+  //..............Handle access lavel change a lesson from db by id..............//
+
+  //..............Handle visibility change a lesson from db by id..............//
+  const handleAccessLavelChange = async (lessonId, newAccessLevel) => {
+    try {
+      const res = await axiosSecure.put(`/lessons/access/${lessonId}`, {
+        accessLevel: newAccessLevel,
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        refetch();
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      toast.error("Failed to update access level");
     }
   };
 
@@ -94,7 +133,13 @@ const MyLessonsTable = () => {
                             {lesson.privacy}
                           </span>
 
-                          <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
+                          <select
+                            value={lesson.privacy}
+                            onChange={(e) =>
+                              handleVisibilityChange(lesson._id, e.target.value)
+                            }
+                            className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1"
+                          >
                             <option value="public">Public</option>
                             <option value="private">Private</option>
                           </select>
@@ -114,9 +159,26 @@ const MyLessonsTable = () => {
                             {lesson.accessLevel}
                           </span>
 
-                          <select className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1">
+                          <select
+                            value={lesson.accessLevel}
+                            onChange={(e) =>
+                              handleAccessLavelChange(
+                                lesson._id,
+                                e.target.value
+                              )
+                            }
+                            className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-md px-2 py-1"
+                          >
                             <option value="free">Free</option>
-                            <option value="premium">Premium</option>
+                            <option
+                              value="premium"
+                              disabled={!userData?.isPremium}
+                              className={
+                                !userData?.isPremium ? "cursor-not-allowed" : ""
+                              }
+                            >
+                              Premium
+                            </option>
                           </select>
                         </div>
                       </td>
@@ -145,7 +207,6 @@ const MyLessonsTable = () => {
                           </button>
                         </div>
                       </td>
-                      
                     </tr>
                   ))
                 ) : (
