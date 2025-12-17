@@ -9,7 +9,7 @@ const LessonsProvider = ({ children }) => {
   const { user: firebaseUser } = useUserHook();
 
   //----------------------User data fetch by email-------------------//
-  const { data: userData, isLoading } = useQuery({
+  const { data: userData, UsrDataLoading } = useQuery({
     queryKey: ["user", firebaseUser?.email],
     queryFn: async () => {
       if (!firebaseUser?.email) return null;
@@ -61,6 +61,7 @@ const LessonsProvider = ({ children }) => {
 
   const lessonValue = {
     countLoading,
+    UsrDataLoading,
     userData,
     lessonCountData,
     favoriteCount,

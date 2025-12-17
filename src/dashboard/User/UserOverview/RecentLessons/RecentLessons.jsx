@@ -21,6 +21,8 @@ const RecentLessons = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
+  console.log(recentLessons)
+
   return (
     <div>
       <h2 className="text-xl font-semibold text-white mb-4">

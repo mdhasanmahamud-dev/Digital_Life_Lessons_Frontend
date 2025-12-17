@@ -16,6 +16,9 @@ import Favorites from "../pages/Favorites/Favorites/Favorites";
 import LessonDetails from "../pages/LessonDetails/LessonDetails/LessonDetails";
 import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
+import ManageUsers from "../dashboard/Admin/ManageUsers/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
+import AdminProfile from "../dashboard/Admin/AdminProfile/AdminProfile";
 
 const router = createBrowserRouter([
   {
@@ -102,12 +105,32 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
       {
         path: "favorite-lession",
         element: (
           <PrivateRoute>
             <Favorites />
+          </PrivateRoute>
+        ),
+      },
+      //------------------------------Admin related routes---------------------------------//
+      {
+        path: "manage-users",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AdminProfile/>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
