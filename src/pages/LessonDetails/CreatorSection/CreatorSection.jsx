@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
+import { NavLink } from "react-router";
 
 const CreatorSection = ({ lesson }) => {
   const axiosSecure = useAxiosSecure();
@@ -36,9 +37,12 @@ const CreatorSection = ({ lesson }) => {
         </div>
       </div>
 
-      <button className="mt-4 w-full text-sm py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition">
+      <NavLink
+        to={`/creator/${lesson?.creator?.email}`}
+        className="mt-4 block w-full text-sm text-center py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition"
+      >
         View all lessons
-      </button>
+      </NavLink>
     </div>
   );
 };

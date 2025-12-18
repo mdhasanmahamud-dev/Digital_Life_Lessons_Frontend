@@ -21,6 +21,7 @@ import AdminRoute from "./AdminRoute";
 import AdminProfile from "../dashboard/Admin/AdminProfile/AdminProfile";
 import ManageLessons from "../dashboard/Admin/ManageLessons/ManageLessons/ManageLessons";
 import ReportedLessons from "../dashboard/Admin/ReportedLessons/ReportedLessons/ReportedLessons";
+import CreatorProfilePage from "../pages/LessonDetails/CreatorProfilePage/CreatorProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <LessonDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/creator/:email",
+        element: (
+          <PrivateRoute>
+            <CreatorProfilePage />
           </PrivateRoute>
         ),
       },
@@ -131,7 +140,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ManageLessons/>
+              <ManageLessons />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -141,7 +150,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ReportedLessons/>
+              <ReportedLessons />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -151,7 +160,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <AdminProfile/>
+              <AdminProfile />
             </AdminRoute>
           </PrivateRoute>
         ),
