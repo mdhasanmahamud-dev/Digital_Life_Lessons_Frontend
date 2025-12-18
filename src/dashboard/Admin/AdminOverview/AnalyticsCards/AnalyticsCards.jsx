@@ -8,9 +8,11 @@ import {
 } from "react-icons/fa";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
+import useLessonHook from "../../../../hooks/useLessonHook";
 
 const AnalyticsCards = () => {
   const axiosSecure = useAxiosSecure();
+  const {publicLessonCounts, publicLessonCountsLoading} = useLessonHook()
 
   const { data: userCountData, isLoading: userCountLoading } = useQuery({
     queryKey: ["userCountData"],
@@ -20,13 +22,13 @@ const AnalyticsCards = () => {
     },
   });
 
-  const { data: publicLessonCounts, isLoading: publicLessonCountsLoading } = useQuery({
-      queryKey: ["publicLessonCounts"],
-      queryFn: async () => {
-        const res = await axiosSecure.get("/lessons/public/total-count");
-        return res.data.count;
-      },
-  });
+  // const { data: publicLessonCounts, isLoading: publicLessonCountsLoading } = useQuery({
+  //     queryKey: ["publicLessonCounts"],
+  //     queryFn: async () => {
+  //       const res = await axiosSecure.get("/lessons/public/total-count");
+  //       return res.data.count;
+  //     },
+  // });
 
   const { data: todayLessonCount, isLoading: todayLessonLoading } = useQuery({
     queryKey: ["todayLessonCount"],

@@ -43,7 +43,7 @@ const Sidebar = () => {
     },
     {
       name: "Manage Lessons",
-      path: "/dashboard/admin/manage-lessons",
+      path: "/dashboard/manage-lessons",
       icon: <FiLayers />,
     },
     {

@@ -19,6 +19,7 @@ import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import ManageUsers from "../dashboard/Admin/ManageUsers/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AdminProfile from "../dashboard/Admin/AdminProfile/AdminProfile";
+import ManageLessons from "../dashboard/Admin/ManageLessons/ManageLessons/ManageLessons";
 
 const router = createBrowserRouter([
   {
@@ -120,6 +121,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-lessons",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageLessons/>
             </AdminRoute>
           </PrivateRoute>
         ),
