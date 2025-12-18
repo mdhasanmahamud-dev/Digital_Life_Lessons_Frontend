@@ -80,7 +80,6 @@ const LessonsProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  console.log(privateLessonCounts);
   const lessonValue = {
     countLoading,
     UsrDataLoading,

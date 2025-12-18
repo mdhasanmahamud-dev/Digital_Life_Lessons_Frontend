@@ -17,11 +17,10 @@ const Favorites = () => {
   const { user } = useUserHook();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const { data: favorites = [], isLoading } = useQuery({
+  const { data: favorites = [], isLoading, refetch } = useQuery({
     queryKey: ["favorites"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/favorites?email=${user?.email}`);
-      console.log(res);
       return res.data.favorites;
     },
   });
@@ -50,7 +49,7 @@ const Favorites = () => {
           ))}
         </select>
       </div>
-      <FavoritesTable favorites={filteredFavorites} />
+      <FavoritesTable favorites={filteredFavorites} refetch={refetch}/>
     </div>
   );
 };
