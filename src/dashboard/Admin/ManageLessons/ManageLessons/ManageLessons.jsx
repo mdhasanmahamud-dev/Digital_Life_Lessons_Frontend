@@ -33,7 +33,7 @@ const ManageLessons = () => {
       {/* Stats */}
       <ManageLessonStats />
       {/* Lessons Table */}
-      <ManageLessonTable lessons={lessons} />
+      <ManageLessonTable lessons={lessons} refetch={refetch}/>
     </div>
   );
 };

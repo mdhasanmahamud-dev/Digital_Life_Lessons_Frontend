@@ -1,6 +1,19 @@
 import { FiTrash2, FiStar, FiCheck } from "react-icons/fi";
+import useLessonHook from "../../../../hooks/useLessonHook";
 
-const ManageLessonTable = ({ lessons }) => {
+const ManageLessonTable = ({ lessons, refetch }) => {
+  const { deleteLesson } = useLessonHook();
+
+  //...................Handle delete a favorite function.......................//
+  const handleDelete = async (id) => {
+    try {
+      await deleteLesson(id);
+      refetch();
+    } catch (error) {
+      console.error("Failed to delete lesson:", error);
+    }
+  };
+
   return (
     <div className="rounded-2xl shadow-sm bg-slate-900">
       <div className="overflow-x-auto">
@@ -58,15 +71,18 @@ const ManageLessonTable = ({ lessons }) => {
                 </td>
 
                 <td className="p-4 flex flex-wrap gap-2">
-                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-rose-600 hover:bg-rose-700 text-white text-sm">
+                  <button
+                    onClick={() => handleDelete(lesson._id)}
+                    className="flex items-center gap-1 px-3 py-1 rounded bg-rose-600 hover:bg-rose-700 text-white text-sm cursor-pointer"
+                  >
                     <FiTrash2 /> Delete
                   </button>
 
-                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm">
+                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm cursor-pointer">
                     <FiStar /> Make Featured
                   </button>
 
-                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-green-500 hover:bg-green-600 text-slate-950 text-sm">
+                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-green-500 hover:bg-green-600 text-slate-950 text-sm cursor-pointer">
                     <FiCheck /> Mark Reviewed
                   </button>
                 </td>

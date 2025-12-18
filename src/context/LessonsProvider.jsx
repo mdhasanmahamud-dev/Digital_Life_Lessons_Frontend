@@ -1,6 +1,7 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 import useUserHook from "../hooks/useUserHook";
 export const LessonsContext = createContext(null);
 
@@ -34,22 +35,24 @@ const LessonsProvider = ({ children }) => {
   });
 
   //------------------------public Lessons data count fetch-------------------------//
-  const { data: publicLessonCounts, isLoading: publicLessonCountsLoading } =useQuery({
+  const { data: publicLessonCounts, isLoading: publicLessonCountsLoading } =
+    useQuery({
       queryKey: ["publicLessonCounts"],
       queryFn: async () => {
         const res = await axiosSecure.get("/lessons/public/total-count");
         return res.data.count;
       },
-  });
+    });
 
   //------------------------private Lessons data count fetch-------------------------//
-  const { data: privateLessonCounts, isLoading: privateLessonCountsLoading } = useQuery({
+  const { data: privateLessonCounts, isLoading: privateLessonCountsLoading } =
+    useQuery({
       queryKey: ["privateLessonCounts"],
       queryFn: async () => {
         const res = await axiosSecure.get("/lessons/private/total-count");
         return res.data.count;
       },
-  });
+    });
   //------------------------Favorites data count fetch------------------------------//
   const {
     data: favoriteCount,
@@ -68,16 +71,30 @@ const LessonsProvider = ({ children }) => {
 
   //.............................Delete a lesson by id.............................//
   const deleteLesson = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this lesson?"
-    );
-    if (!confirmDelete) return false;
-
     try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+      });
+
+      if (!result.isConfirmed) return;
+
       const response = await axiosSecure.delete(`lessons/${id}`);
-      console.log(response);
+
+      Swal.fire(
+        response.data.success ? "Deleted!" : "Failed!",
+        response.data.message,
+        response.data.success ? "success" : "error"
+      );
+
       return response;
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error!", "Something went wrong.");
+    }
   };
 
   const lessonValue = {
