@@ -3,7 +3,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 
 const CreatorSection = ({ lesson }) => {
-  console.log(lesson?.creator?.email);
   const axiosSecure = useAxiosSecure();
 
   //------------------------Lessons data count fetch--------------------------------//
@@ -13,13 +12,12 @@ const CreatorSection = ({ lesson }) => {
       const res = await axiosSecure.get(
         `/lessons/count/${lesson?.creator?.email}`
       );
-      console.log(res);
       return res.data.count;
     },
   });
 
   if (countLoading) return <LoadingSpinner />;
-  console.log(lessonCountData);
+
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
       <p className="text-xs uppercase text-slate-500 mb-3">Lesson Creator</p>
@@ -32,7 +30,9 @@ const CreatorSection = ({ lesson }) => {
         />
         <div>
           <p className="font-semibold text-white">{lesson?.creator?.name}</p>
-          <p className="text-sm text-slate-400">Total Lessons: {lessonCountData}</p>
+          <p className="text-sm text-slate-400">
+            Total Lessons: {lessonCountData}
+          </p>
         </div>
       </div>
 

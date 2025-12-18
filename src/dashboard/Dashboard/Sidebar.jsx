@@ -48,7 +48,7 @@ const Sidebar = () => {
     },
     {
       name: "Reported Lessons",
-      path: "/dashboard/admin/reported-lessons",
+      path: "/dashboard/reported-lessons",
       icon: <FiAlertTriangle />,
     },
     {

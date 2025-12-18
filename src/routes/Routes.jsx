@@ -20,6 +20,7 @@ import ManageUsers from "../dashboard/Admin/ManageUsers/ManageUsers/ManageUsers"
 import AdminRoute from "./AdminRoute";
 import AdminProfile from "../dashboard/Admin/AdminProfile/AdminProfile";
 import ManageLessons from "../dashboard/Admin/ManageLessons/ManageLessons/ManageLessons";
+import ReportedLessons from "../dashboard/Admin/ReportedLessons/ReportedLessons/ReportedLessons";
 
 const router = createBrowserRouter([
   {
@@ -131,6 +132,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <ManageLessons/>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "reported-lessons",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ReportedLessons/>
             </AdminRoute>
           </PrivateRoute>
         ),
