@@ -1,8 +1,11 @@
 import { FiTrash2, FiStar, FiCheck } from "react-icons/fi";
 import useLessonHook from "../../../../hooks/useLessonHook";
+import { toast } from "react-toastify";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageLessonTable = ({ lessons, refetch }) => {
   const { deleteLesson } = useLessonHook();
+  const axiosSecure = useAxiosSecure();
 
   //...................Handle delete a favorite function.......................//
   const handleDelete = async (id) => {
@@ -11,6 +14,25 @@ const ManageLessonTable = ({ lessons, refetch }) => {
       refetch();
     } catch (error) {
       console.error("Failed to delete lesson:", error);
+    }
+  };
+
+  const handleUpdateFeatured = async (id, currentStatus) => {
+    console.log(id, currentStatus)
+    try {
+      const response = await axiosSecure.put(`/lessons/featured/${id}`, {
+        featured: !currentStatus,
+      });
+
+      if (response.data.success) {
+        toast.success("Featured updated successfully");
+        refetch(); 
+      } else {
+        toast.error("Failed to update featured");
+      }
+    } catch (error) {
+      console.error("Error updating featured:", error);
+      toast.error("Error updating featured:", error);
     }
   };
 
@@ -78,7 +100,12 @@ const ManageLessonTable = ({ lessons, refetch }) => {
                     <FiTrash2 /> Delete
                   </button>
 
-                  <button className="flex items-center gap-1 px-3 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm cursor-pointer">
+                  <button
+                    onClick={() =>
+                      handleUpdateFeatured(lesson._id, lesson.isFeatured)
+                    }
+                    className="flex items-center gap-1 px-3 py-1 rounded bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm cursor-pointer"
+                  >
                     <FiStar /> Make Featured
                   </button>
 
