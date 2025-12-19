@@ -1,26 +1,31 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 
 const ActiveContributors = () => {
-  return (
-    <div>
-      {/* Most Active Contributors Section */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-        <h3 className="text-xl font-semibold mb-4">Most Active Contributors</h3>
+  const axiosSecure = useAxiosSecure();
 
-        <div className="space-y-3 text-slate-300">
-          <div className="flex justify-between">
-            <span>Jhankar Mahbub</span>
-            <span className="text-slate-400">42 lessons</span>
+  const { data, isLoading } = useQuery({
+    queryKey: ["top-contributors"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/lessons/analytics/top-contributors");
+      return res.data.contributors;
+    },
+  });
+
+  if (isLoading) return <LoadingSpinner/>
+
+  return (
+    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h3 className="text-xl font-semibold mb-4">Most Active Contributors</h3>
+
+      <div className="space-y-3 text-slate-300">
+        {data?.map((user) => (
+          <div key={user._id} className="flex justify-between">
+            <span>{user.name || user._id}</span>
+            <span className="text-slate-400">{user.totalLessons} lessons</span>
           </div>
-          <div className="flex justify-between">
-            <span>Hasan Mahamud</span>
-            <span className="text-slate-400">29 lessons</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Sumaiya Islam</span>
-            <span className="text-slate-400">21 lessons</span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

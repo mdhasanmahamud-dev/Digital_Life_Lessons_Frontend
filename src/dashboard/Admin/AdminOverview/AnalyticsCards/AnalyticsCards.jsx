@@ -12,7 +12,7 @@ import useLessonHook from "../../../../hooks/useLessonHook";
 
 const AnalyticsCards = () => {
   const axiosSecure = useAxiosSecure();
-  const {publicLessonCounts, publicLessonCountsLoading} = useLessonHook()
+  const { publicLessonCounts, publicLessonCountsLoading } = useLessonHook();
 
   const { data: userCountData, isLoading: userCountLoading } = useQuery({
     queryKey: ["userCountData"],
@@ -38,28 +38,33 @@ const AnalyticsCards = () => {
     },
   });
 
-  const { data: activeContributors , isLoading : activeContributorsLoading } = useQuery({
-  queryKey: ["activeContributors"],
-  queryFn: async () => {
-    const res = await axiosSecure.get(
-      "/lessons/analytics/active-contributors"
-    );
-    return res.data.count;
-  },
+  const { data: activeContributors, isLoading: activeContributorsLoading } =
+    useQuery({
+      queryKey: ["activeContributors"],
+      queryFn: async () => {
+        const res = await axiosSecure.get(
+          "/lessons/analytics/active-contributors"
+        );
+        return res.data.count;
+      },
+    });
+
+  const { data: reportsCount, isLoading: reportsCountLoading } = useQuery({
+    queryKey: ["reportsCount"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/reportes/count");
+      return res.data.count;
+    },
   });
 
-  const { data: reportsCount , isLoading : reportsCountLoading } = useQuery({
-  queryKey: ["reportsCount"],
-  queryFn: async () => {
-    const res = await axiosSecure.get(
-      "/reportes/count"
-    );
-    return res.data.count;
-  },
-  });
-
-
-  if (userCountLoading || publicLessonCountsLoading || todayLessonLoading || activeContributorsLoading || reportsCountLoading) return <LoadingSpinner />;
+  if (
+    userCountLoading ||
+    publicLessonCountsLoading ||
+    todayLessonLoading ||
+    activeContributorsLoading ||
+    reportsCountLoading
+  )
+    return <LoadingSpinner />;
 
   return (
     <div>
