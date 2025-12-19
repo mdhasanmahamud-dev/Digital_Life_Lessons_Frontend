@@ -48,8 +48,18 @@ const AnalyticsCards = () => {
   },
   });
 
+  const { data: reportsCount , isLoading : reportsCountLoading } = useQuery({
+  queryKey: ["reportsCount"],
+  queryFn: async () => {
+    const res = await axiosSecure.get(
+      "/reportes/count"
+    );
+    return res.data.count;
+  },
+  });
 
-  if (userCountLoading || publicLessonCountsLoading || todayLessonLoading || activeContributorsLoading) return <LoadingSpinner />;
+
+  if (userCountLoading || publicLessonCountsLoading || todayLessonLoading || activeContributorsLoading || reportsCountLoading) return <LoadingSpinner />;
 
   return (
     <div>
@@ -77,7 +87,7 @@ const AnalyticsCards = () => {
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5">
           <p className="text-slate-400 text-sm">Reported Lessons</p>
           <div className="flex items-center justify-between mt-3">
-            <h2 className="text-2xl font-bold">12</h2>
+            <h2 className="text-2xl font-bold">{reportsCount}</h2>
             <FaFlag className="text-red-500 text-3xl" />
           </div>
         </div>
