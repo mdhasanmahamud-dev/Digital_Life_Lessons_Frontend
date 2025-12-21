@@ -66,8 +66,10 @@ const ManageUsersTable = ({ users, refetch }) => {
                         </span>
                       </td>
 
-                      {/* Total Lessons (Static) */}
-                      <td className="p-4 text-center">0</td>
+                      {/* Total Lessons  */}
+                      <td className="p-4 text-center">
+                        {user.totalLessons || 0}
+                      </td>
 
                       {/* Actions */}
                       <td className="p-4 flex flex-wrap gap-2">
