@@ -5,11 +5,16 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import useLessonHook from "../../../hooks/useLessonHook";
+import Lottie from "lottie-react";
+import successAnimation from "../../../assets/success.json";
+import { useState } from "react";
+
 function AddLesson() {
   const { user } = useUserHook();
   const { lessonCountRefetch } = useLessonHook();
   const axiosSecure = useAxiosSecure();
   let navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,15 +30,24 @@ function AddLesson() {
     const response = await axiosSecure.post("/lessons", data);
 
     if (response.data.success) {
-      toast.success(response.data.message);
+      setShowSuccess(true);
+      setTimeout(() => {
+        navigate("/dashboard/my-lession");
+      }, 1500);
       lessonCountRefetch();
-      navigate("/dashboard/my-lession");
     } else {
       toast.error(response.data.message);
     }
   };
   return (
-    <div className="min-h-screen bg-slate-950 p-6">
+    <div className="min-h-screen bg-slate-950 p-6 relative">
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black/70 flex  justify-center z-50">
+          <div className="w-72 text-center">
+            <Lottie animationData={successAnimation} loop={true} />
+          </div>
+        </div>
+      )}
       <div className="max-w-5xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-700">
         <h1 className="text-2xl font-bold text-white mb-6 text-center">
           Add Lesson
