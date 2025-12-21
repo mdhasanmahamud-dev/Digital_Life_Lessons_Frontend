@@ -2,6 +2,7 @@ import Banner from "../Banner/Banner";
 import WhyLearning from "../WhyLearning/WhyLearning";
 import Featured from "../Featured/Featured";
 import MostSavedLessons from "../MostSavedLessons/MostSavedLessons";
+import TopContributors from "../Topcontributors/Topcontributors";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <WhyLearning />
       <Featured />
       <MostSavedLessons />
+      <TopContributors />
     </div>
   );
 };
