@@ -12,7 +12,7 @@ const InteractionButtons = ({ lessonId }) => {
   const { favoriteCountRefetch } = useLessonHook();
   const [isFavorite, setIsFavorite] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
-
+ 
   const handleFavorite = async () => {
     if (!user) return toast("Please login first!");
     setIsFavorite(true);
@@ -34,6 +34,19 @@ const InteractionButtons = ({ lessonId }) => {
     }
   };
 
+  const handleUpdateLike = async () => {
+    if (!user) return toast("Please login first!");
+    try {
+      const response = await axiosSecure.patch(`/lessons/like/${lessonId}`);
+      if (response.data.success) {
+        toast.success("Liked!");
+      }
+    } catch (error) {
+      const message = error?.response?.data?.message || "Failed to like";
+      toast.error(message);
+    }
+  };
+
   return (
     <div className="flex flex-wrap gap-4 border-t border-slate-800 pt-6">
       <button
@@ -51,7 +64,12 @@ const InteractionButtons = ({ lessonId }) => {
         <FaFlag /> Report
       </button>
 
-      <Action icon={FaHeart} label="Like" />
+      <button
+        onClick={() => handleUpdateLike()}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
+      >
+        <FaHeart /> Like
+      </button>
       <Action icon={FaShareAlt} label="Share" />
       <ReportModal
         lessonId={lessonId}
