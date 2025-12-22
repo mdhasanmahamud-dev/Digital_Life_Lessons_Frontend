@@ -4,6 +4,9 @@ A full-stack web application to create, explore, and learn life lessons. Users c
 
 ---
 
+//Admin email : mdhassanali01947@gmail.com
+//Admin Passowrd : MdHasanMahamud@@@@@
+
 ## 🛠 Tech Stack
 
 ### Frontend
