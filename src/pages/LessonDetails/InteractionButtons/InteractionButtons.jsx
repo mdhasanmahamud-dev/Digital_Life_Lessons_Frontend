@@ -6,13 +6,13 @@ import useUserHook from "../../../hooks/useUserHook";
 import useLessonHook from "../../../hooks/useLessonHook";
 import ReportModal from "../ReportModal/ReportModal";
 
-const InteractionButtons = ({ lessonId }) => {
+const InteractionButtons = ({ lessonId, setLike }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useUserHook();
   const { favoriteCountRefetch } = useLessonHook();
   const [isFavorite, setIsFavorite] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
- 
+
   const handleFavorite = async () => {
     if (!user) return toast("Please login first!");
     setIsFavorite(true);
@@ -38,8 +38,10 @@ const InteractionButtons = ({ lessonId }) => {
     if (!user) return toast("Please login first!");
     try {
       const response = await axiosSecure.patch(`/lessons/like/${lessonId}`);
+      console.log(response)
       if (response.data.success) {
         toast.success("Liked!");
+        setLike(response?.data?.like)
       }
     } catch (error) {
       const message = error?.response?.data?.message || "Failed to like";

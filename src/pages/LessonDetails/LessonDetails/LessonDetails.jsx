@@ -8,12 +8,14 @@ import EngagementSection from "../EngagementSection/EngagementSection";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import RecommendedLessons from "../RecommendedLessons/RecommendedLessons";
+import { useEffect, useState } from "react";
 
 const LessonDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-
+  const [like, setLike] = useState(0);
   // ------------------- Fetch Single Lesson ----------------------------//
+
   const {
     data: lesson,
     isLoading,
@@ -28,6 +30,12 @@ const LessonDetails = () => {
     },
   });
 
+  useEffect(() => {
+    if (lesson) {
+      setLike(lesson.like || 0);
+    }
+  }, [lesson]);
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -37,14 +45,14 @@ const LessonDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Main */}
           <div className="lg:col-span-2 space-y-8">
-            <InteractionButtons lessonId={lesson?._id}/>
+            <InteractionButtons lessonId={lesson?._id} setLike={setLike} />
             <RecommendedLessons lessonId={lesson?._id} />
           </div>
           {/* Sidebar */}
           <div className="space-y-6">
             <CreatorSection lesson={lesson} />
             <LessonMetadata lesson={lesson} />
-            <EngagementSection lesson={lesson} />
+            <EngagementSection lesson={lesson} like={like} />
           </div>
         </div>
       </div>

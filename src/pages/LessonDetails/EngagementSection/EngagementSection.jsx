@@ -2,11 +2,11 @@ import React from "react";
 import { FaHeart, FaBookmark, FaEye } from "react-icons/fa";
 import useLessonHook from "../../../hooks/useLessonHook";
 
-const EngagementSection = ({lesson}) => {
+const EngagementSection = ({like}) => {
   const {favoriteCount} = useLessonHook()
 
   const stats = {
-    likes: lesson?.like,
+    likes: like,
     favorites: favoriteCount,
     
   };
