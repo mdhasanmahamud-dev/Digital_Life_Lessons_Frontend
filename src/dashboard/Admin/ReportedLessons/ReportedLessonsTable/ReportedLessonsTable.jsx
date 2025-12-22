@@ -5,15 +5,19 @@ import { useQuery } from "@tanstack/react-query";
 const ReportedLessonsTable = ({ handleOpenModal }) => {
   const axiosSecure = useAxiosSecure();
 
-  const {data: reports = [],isLoading, refetch} = useQuery({
+  const {
+    data: reports = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
       const res = await axiosSecure.get("/reportes");
-      console.log(res.data.data)
+      console.log(res.data.data);
       return res.data.data;
     },
   });
-  
+
   return (
     <div className="overflow-x-auto bg-slate-800 rounded-xl shadow-md">
       <table className="min-w-full divide-y divide-slate-700">
@@ -38,19 +42,19 @@ const ReportedLessonsTable = ({ handleOpenModal }) => {
             >
               <td className="px-6 py-4 text-white">{report?.lessonTitle}</td>
               <td className="px-6 py-4 text-center text-white font-medium">
-                 {report.reportCount}
+                {report.reportCount}
               </td>
               <td className="px-6 py-4 flex justify-center gap-2">
                 <button
-                  onClick={handleOpenModal}
-                  className="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg flex items-center gap-1"
+                  onClick={() => handleOpenModal(report?.lessonId)}
+                  className="px-3 py-1 bg-amber-500 cursor-pointer hover:bg-amber-600 text-slate-950 rounded-lg flex items-center gap-1"
                 >
                   <FaEye /> View
                 </button>
-                <button className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-1">
+                <button className="px-3 py-1 bg-red-600 cursor-pointer hover:bg-red-700 text-white rounded-lg flex items-center gap-1">
                   <FaTrash /> Delete
                 </button>
-                <button className="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded-lg flex items-center gap-1">
+                <button className="px-3 py-1 bg-gray-600 cursor-pointer hover:bg-gray-500 text-white rounded-lg flex items-center gap-1">
                   <FaTimes /> Ignore
                 </button>
               </td>

@@ -4,16 +4,30 @@ import ReportModal from "../ReportModal/ReportModal";
 
 const ReportedLessons = () => {
   const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal  = () => setOpenModal(true)
-  const  handleCloseModal  = () => setOpenModal(false)
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
+
+  const handleOpenModal = (lessonId) => {
+    setSelectedLessonId(lessonId);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedLessonId(null);
+  };
 
   return (
     <div className="p-6 min-h-screen">
       <h1 className="text-2xl font-bold text-white mb-6">Reported Lessons</h1>
-      {/* Table receives openModal as prop */}
-      <ReportedLessonsTable handleOpenModal={handleOpenModal}/>
-      {/* Modal */}
-      {openModal && <ReportModal handleCloseModal={handleCloseModal}/>}
+
+      <ReportedLessonsTable handleOpenModal={handleOpenModal} />
+
+      {openModal && (
+        <ReportModal
+          lessonId={selectedLessonId}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

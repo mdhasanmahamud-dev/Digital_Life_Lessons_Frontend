@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -24,6 +24,7 @@ const ReportModal = ({ isOpen, onClose, lessonId }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useUserHook();
   const { userData } = useLessonHook();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -33,6 +34,7 @@ const ReportModal = ({ isOpen, onClose, lessonId }) => {
 
   const onSubmit = async (formData) => {
     try {
+      setLoading(true);
       const report = {
         lessonId,
         reporterUserId: userData?._id,
@@ -51,6 +53,8 @@ const ReportModal = ({ isOpen, onClose, lessonId }) => {
     } catch (error) {
       console.error("Report submit error:", error);
       toast.error("Something went wrong while submitting the report.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,10 +121,11 @@ const ReportModal = ({ isOpen, onClose, lessonId }) => {
               Cancel
             </button>
             <button
+              disabled={loading}
               type="submit"
               className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-medium cursor-pointer"
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
