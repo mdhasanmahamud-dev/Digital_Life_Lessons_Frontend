@@ -1,15 +1,12 @@
 import { FaTrash, FaEye, FaTimes } from "react-icons/fa";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-
+import LoadingSpinner from "../../../../components/LoadingSpinner";
+import Swal from "sweetalert2";
 const ReportedLessonsTable = ({ handleOpenModal }) => {
   const axiosSecure = useAxiosSecure();
 
-  const {
-    data: reports = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const {data: reports = [],isLoading,refetch} = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
       const res = await axiosSecure.get("/reportes");
@@ -17,6 +14,48 @@ const ReportedLessonsTable = ({ handleOpenModal }) => {
       return res.data.data;
     },
   });
+
+  const handleDeleteLesson = async (lessonId) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This lesson will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626", // red
+      cancelButtonColor: "#64748b", // gray
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      const res = await axiosSecure.delete(`/lessons/${lessonId}`);
+
+      if (res.data.success) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Lesson has been deleted successfully.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        refetch();
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete lesson.",
+        icon: "error",
+      });
+    }
+  };
+
+  
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="overflow-x-auto bg-slate-800 rounded-xl shadow-md">
@@ -51,10 +90,13 @@ const ReportedLessonsTable = ({ handleOpenModal }) => {
                 >
                   <FaEye /> View
                 </button>
-                <button className="px-3 py-1 bg-red-600 cursor-pointer hover:bg-red-700 text-white rounded-lg flex items-center gap-1">
+                <button
+                  onClick={() => handleDeleteLesson(report?.lessonId)}
+                  className="px-3 py-1 bg-red-600 cursor-pointer hover:bg-red-700 text-white rounded-lg flex items-center gap-1"
+                >
                   <FaTrash /> Delete
                 </button>
-                <button className="px-3 py-1 bg-gray-600 cursor-pointer hover:bg-gray-500 text-white rounded-lg flex items-center gap-1">
+                <button onClick={() => handleIgnoreLesson()} className="px-3 py-1 bg-gray-600 cursor-pointer hover:bg-gray-500 text-white rounded-lg flex items-center gap-1">
                   <FaTimes /> Ignore
                 </button>
               </td>
