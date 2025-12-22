@@ -7,6 +7,7 @@ import useLessonHook from "../../../hooks/useLessonHook";
 
 const PublicLessonsCard = ({ lesson }) => {
   const { userData } = useLessonHook();
+  console.log(userData)
   const {
     _id,
     title,

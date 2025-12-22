@@ -8,7 +8,7 @@ import useLessonHook from "../../hooks/useLessonHook";
 
 const Profile = () => {
   const { user: firebaseUser } = useUserHook();
-  const {userData, lessonCountData, isLoading, countLoading} = useLessonHook()
+  const {userData, lessonCountData,favoriteCount, isLoading, countLoading} = useLessonHook()
   const axiosSecure = useAxiosSecure();
 
   //------------------------Lessons data count fetch--------------------------------//
@@ -73,7 +73,7 @@ const Profile = () => {
           </div>
 
           <div className="bg-slate-800 p-6 rounded-xl text-center border border-gray-700 hover:border-blue-500 transition">
-            <h3 className="text-3xl font-bold text-white">34</h3>
+            <h3 className="text-3xl font-bold text-white">{favoriteCount}</h3>
             <p className="text-gray-400 font-semibold mt-1">Favorites</p>
           </div>
 

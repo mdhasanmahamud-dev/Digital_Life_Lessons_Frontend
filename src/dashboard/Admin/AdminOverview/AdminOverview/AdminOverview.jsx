@@ -7,6 +7,7 @@ const AdminOverview = () => {
       <div className="container max-w-7xl mx-auto space-y-10">
         <AnalyticsCards />
         <ActiveContributors />
+        
         {/* Graph Placeholder */}
         <div className="bg-slate-900 border border-dashed border-slate-700 rounded-2xl p-10 text-center">
           <h3 className="text-lg font-semibold mb-2">Analytics Graphs</h3>

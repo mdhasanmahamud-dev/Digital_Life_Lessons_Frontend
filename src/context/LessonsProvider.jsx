@@ -109,6 +109,7 @@ const LessonsProvider = ({ children }) => {
     favoriteCountRefetch,
     publicLessonCountsLoading,
     privateLessonCountsLoading,
+    favoriteCountLoading,
     deleteLesson,
   };
   return (

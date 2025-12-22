@@ -37,6 +37,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: "Home", path: "/", icon: <FiHome /> },
     { name: "Dashboard", path: "/dashboard", icon: <FiPieChart /> },
     {
+      name: "Add Lesson",
+      path: "/dashboard/add-lesson",
+      icon: <FiPlusCircle />,
+    },
+    {
       name: "Manage Users",
       path: "/dashboard/manage-users",
       icon: <FiUsers />,
