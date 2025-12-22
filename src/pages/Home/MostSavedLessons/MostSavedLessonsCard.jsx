@@ -70,7 +70,7 @@ const MostSavedLessonsCard = ({ lesson }) => {
 
       {/* Button */}
       <Link
-        to={`/lesson-details/${_id}`}
+        to={`/upgrade`}
         className={`mt-auto text-center text-sm font-semibold px-4 py-2 rounded-lg transition 
           ${
             isPremiumLesson
