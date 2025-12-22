@@ -56,13 +56,6 @@ const RecentLessons = () => {
           </li>
         ))}
       </ul>
-
-      {/* Placeholder Analytics Chart */}
-      <div className="mt-6">
-        <div className="h-32 rounded-lg bg-linear-to-r from-slate-900 to-slate-800 border border-dashed border-gray-700 flex items-center justify-center text-sm text-gray-400">
-          Analytics Chart (Weekly/Monthly Reflections)
-        </div>
-      </div>
     </div>
   );
 };

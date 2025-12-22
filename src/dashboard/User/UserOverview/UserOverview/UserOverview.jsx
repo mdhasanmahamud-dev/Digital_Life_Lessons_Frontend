@@ -1,6 +1,7 @@
 import RecentLessons from "../RecentLessons/RecentLessons";
 import QuickShortcuts from "../QuickShortcuts/QuickShortcuts";
 import StatCards from "../StatCards/StatCards";
+import AnalyticsChart from "../AnalyticsChart/AnalyticsChart";
 
 function UserOverview() {
   return (
@@ -20,8 +21,8 @@ function UserOverview() {
         </div>
 
         {/* Footer small help */}
-        <div className="mt-6 text-sm text-gray-400">
-          Tip: এখানে আপনি Chart বা recent filters যোগ করতে পারো।
+        <div className="mt-6">
+          <AnalyticsChart />
         </div>
       </div>
     </div>
