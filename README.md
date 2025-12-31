@@ -3,7 +3,7 @@
 A full-stack web application to create, explore, and learn life lessons. Users can browse public lessons, save favorites, report inappropriate content, and access premium content using Stripe payment. The app uses **React**, **Tailwind CSS**, **React Query**, **Firebase Authentication**, and a **Node.js + Express + MongoDB backend**.
 
 ---
-
+//Live Link : https://digital-life-lessons-638c6.web.app
 //Admin email : mdhassanali01947@gmail.com
 //Admin Passowrd : MdHasanMahamud@@@@@
 
