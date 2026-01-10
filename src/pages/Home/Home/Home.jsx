@@ -6,6 +6,7 @@ import TopContributors from "../Topcontributors/Topcontributors";
 import Testimonials from "../Testimonials/Testimonials";
 import Subscription from "../Subscription/Subscription";
 import HowItWorks from "../HowItWorks/HowItWorks";
+import Achievements from "../Achievements/Achievements";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <Testimonials/>
       <Subscription/>
       <HowItWorks/>
+      <Achievements/>
     </div>
   );
 };
