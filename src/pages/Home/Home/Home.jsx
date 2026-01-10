@@ -5,6 +5,7 @@ import MostSavedLessons from "../MostSavedLessons/MostSavedLessons";
 import TopContributors from "../Topcontributors/Topcontributors";
 import Testimonials from "../Testimonials/Testimonials";
 import Subscription from "../Subscription/Subscription";
+import HowItWorks from "../HowItWorks/HowItWorks";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <TopContributors />
       <Testimonials/>
       <Subscription/>
+      <HowItWorks/>
     </div>
   );
 };
