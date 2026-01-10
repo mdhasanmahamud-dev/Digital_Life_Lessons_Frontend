@@ -4,6 +4,7 @@ import Featured from "../Featured/Featured";
 import MostSavedLessons from "../MostSavedLessons/MostSavedLessons";
 import TopContributors from "../Topcontributors/Topcontributors";
 import Testimonials from "../Testimonials/Testimonials";
+import Subscription from "../Subscription/Subscription";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <MostSavedLessons />
       <TopContributors />
       <Testimonials/>
+      <Subscription/>
     </div>
   );
 };
