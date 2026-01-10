@@ -23,6 +23,7 @@ import ManageLessons from "../dashboard/Admin/ManageLessons/ManageLessons/Manage
 import ReportedLessons from "../dashboard/Admin/ReportedLessons/ReportedLessons/ReportedLessons";
 import CreatorProfilePage from "../pages/LessonDetails/CreatorProfilePage/CreatorProfilePage";
 import About from "../pages/About/About";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

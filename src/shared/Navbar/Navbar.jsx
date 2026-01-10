@@ -21,6 +21,7 @@ const Navbar = () => {
     { name: "Public Lession", path: "/public-lession", isLogin: false },
     { name: "Upgrade ", path: "/upgrade", isLogin: false },
     { name: "About ", path: "/about", isLogin: false },
+    { name: "Contact ", path: "/contact", isLogin: false },
   ];
 
   return (
