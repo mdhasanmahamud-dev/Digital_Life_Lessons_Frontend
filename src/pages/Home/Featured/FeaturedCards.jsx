@@ -14,7 +14,7 @@ const FeaturedCards = () => {
       return res.data.data;
     },
   });
-
+ console.log(featuredLessons)
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="container max-w-7xl mx-auto px-6 py-8">

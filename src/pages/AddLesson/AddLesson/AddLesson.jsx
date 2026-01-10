@@ -176,6 +176,22 @@ function AddLesson() {
             )}
           </div>
 
+          {/* Image URL (Full width) */}
+          <div className="lg:col-span-2">
+            <label className="text-white block mb-1">Image URL</label>
+            <input
+              type="text"
+              {...register("image", { required: "Image URL is required" })}
+              placeholder="https://example.com/image.jpg"
+              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+            />
+            {errors.image && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.image.message}
+              </p>
+            )}
+          </div>
+
           {/* Submit button (Full width) */}
           <div className="lg:col-span-2">
             <button
