@@ -15,11 +15,11 @@ const Navbar = () => {
   const closeProfile = () => setShowMobileMenu(false);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Add Lesson", path: "/dashboard/add-lesson" },
-    { name: "My Lession", path: "/dashboard/my-lession" },
-    { name: "Public Lession", path: "/public-lession" },
-    { name: "Upgrade ", path: "/upgrade" },
+    { name: "Home", path: "/", isLogin: false },
+    { name: "Add Lesson", path: "/dashboard/add-lesson", isLogin: true },
+    { name: "My Lession", path: "/dashboard/my-lession", isLogin: true },
+    { name: "Public Lession", path: "/public-lession", isLogin: false },
+    { name: "Upgrade ", path: "/upgrade", isLogin: false },
   ];
 
   return (
@@ -33,20 +33,22 @@ const Navbar = () => {
         </NavLink>
 
         <ul className="hidden md:flex items-center space-x-4 text-gray-800">
-          {navItems.map((item) => (
-            <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-indigo-600  font-semibold border-b-2 pb-1 transition-all duration-200"
-                    : "hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                }
-              >
-                {item.name}
-              </NavLink>
-            </li>
-          ))}
+          {navItems
+            .filter((item) => (item.isLogin ? user : true))
+            .map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-indigo-600 font-semibold border-b-2 pb-1 transition-all duration-200"
+                      : "hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
         </ul>
 
         {user ? (
@@ -97,7 +99,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Profile Dropdown */}
-          {isOpen && <ProfileDropDown closeProfile/>}
+          {isOpen && <ProfileDropDown closeProfile />}
         </div>
       </div>
       {showMobileMenu && (
