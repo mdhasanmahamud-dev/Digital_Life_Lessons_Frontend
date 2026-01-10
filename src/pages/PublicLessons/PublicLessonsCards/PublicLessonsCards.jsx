@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import PublicLessonsCard from "../PublicLessonsCard/PublicLessonsCard";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SearchFilterSort from "../SearchFilterSort/SearchFilterSort";
+import useUserHook from "../../../hooks/useUserHook";
+import ContentCard from "../../../components/ContentCard";
 
 const PublicLessonsCards = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useUserHook(); // Logged-in user info
 
   const [localSearch, setLocalSearch] = useState("");
   const [search, setSearch] = useState("");
@@ -21,7 +23,7 @@ const PublicLessonsCards = () => {
     setPage(1);
   };
 
-  // Reset
+  // Reset filters
   const handleReset = () => {
     setLocalSearch("");
     setSearch("");
@@ -31,6 +33,7 @@ const PublicLessonsCards = () => {
     setPage(1);
   };
 
+  // Fetch lessons
   const { data, isLoading } = useQuery({
     queryKey: ["publicLessons", search, category, emotion, sort, page],
     queryFn: async () => {
@@ -46,6 +49,7 @@ const PublicLessonsCards = () => {
 
   return (
     <div className="container max-w-7xl mx-auto px-6 py-8">
+      {/* Search + Filter */}
       <SearchFilterSort
         localSearch={localSearch}
         setLocalSearch={setLocalSearch}
@@ -59,15 +63,29 @@ const PublicLessonsCards = () => {
         onReset={handleReset}
       />
 
-      {/* Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Lessons Grid */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {data?.lessons?.length === 0 ? (
           <div className="col-span-full text-center py-20 text-slate-400">
             No public lessons found
           </div>
         ) : (
-          data?.lessons?.map((lesson) => (
-            <PublicLessonsCard key={lesson._id} lesson={lesson} />
+          data.lessons.map((lesson) => (
+            <ContentCard
+              key={lesson._id}
+              title={lesson.title}
+              category={lesson.category}
+              emotionalTone={lesson.emotionalTone}
+              creator={lesson.creator}
+              createdAt={lesson.createdAt}
+              image={lesson.image} // Lesson image
+              accessLevel={lesson.accessLevel} // free or premium
+              userData={user} // Logged-in user for premium check
+              detailsLink={`/lession-details/${lesson._id}`}
+              upgradeLink="/upgrade"
+              buttonText="View Details"
+              showButton={true}
+            />
           ))
         )}
       </div>
