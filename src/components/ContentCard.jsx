@@ -23,6 +23,8 @@ const ContentCard = ({
   const isUserPremium = userData?.isPremium === true;
   const showUpgrade = isPremiumLesson && !isUserPremium;
 
+console.log("Console", title, category, emotionalTone)
+
   return (
     <div
       className="

@@ -22,6 +22,7 @@ import AdminProfile from "../dashboard/Admin/AdminProfile/AdminProfile";
 import ManageLessons from "../dashboard/Admin/ManageLessons/ManageLessons/ManageLessons";
 import ReportedLessons from "../dashboard/Admin/ReportedLessons/ReportedLessons/ReportedLessons";
 import CreatorProfilePage from "../pages/LessonDetails/CreatorProfilePage/CreatorProfilePage";
+import About from "../pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -73,9 +74,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/about",
+        element: <About />,
+      },
     ],
   },
-
   {
     path: "/dashboard",
     element: <DashboardLayout />,

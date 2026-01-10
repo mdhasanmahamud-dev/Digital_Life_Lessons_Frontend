@@ -20,6 +20,7 @@ const Navbar = () => {
     { name: "My Lession", path: "/dashboard/my-lession", isLogin: true },
     { name: "Public Lession", path: "/public-lession", isLogin: false },
     { name: "Upgrade ", path: "/upgrade", isLogin: false },
+    { name: "About ", path: "/about", isLogin: false },
   ];
 
   return (
