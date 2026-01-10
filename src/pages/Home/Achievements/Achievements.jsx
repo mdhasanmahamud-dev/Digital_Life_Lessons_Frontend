@@ -6,7 +6,7 @@ const stats = [
   {
     id: 1,
     icon: <FaUsers size={28} />,
-    title: "Learners",
+    title: "Active Learners",
     value: 12000,
     suffix: "+",
     color: "from-blue-500 to-blue-700",
@@ -14,15 +14,15 @@ const stats = [
   {
     id: 2,
     icon: <FaBookOpen size={28} />,
-    title: "Courses",
+    title: "Lessons Published",
     value: 350,
     suffix: "+",
     color: "from-pink-500 to-pink-700",
   },
   {
     id: 3,
-    icon: <FaProjectDiagram size={28} />,
-    title: "Projects Completed",
+    icon: <FaAward size={28} />,
+    title: "Quizzes Completed",
     value: 8700,
     suffix: "+",
     color: "from-green-400 to-green-600",
@@ -30,12 +30,13 @@ const stats = [
   {
     id: 4,
     icon: <FaAward size={28} />,
-    title: "Awards Won",
-    value: 45,
-    suffix: "",
+    title: "Certificates Earned",
+    value: 4500,
+    suffix: "+",
     color: "from-yellow-400 to-yellow-600",
   },
 ];
+
 
 const Achievements = () => {
   return (
