@@ -17,30 +17,24 @@ const ManageLessons = () => {
     queryKey: ["lessons", category, privacy],
     queryFn: async () => {
       const params = {};
-
       if (category) params.category = category;
       if (privacy) params.privacy = privacy;
 
-      const res = await axiosSecure.get("/all-lessons", {
-        params,
-      });
-
+      const res = await axiosSecure.get("/all-lessons", { params });
       return res.data.lessons;
     },
   });
 
   return (
-    <div className="min-h-screen p-6 bg-slate-950 text-slate-100">
+    <div className="min-h-screen p-6 dark:bg-slate-950 text-gray-900 dark:text-slate-100 transition-colors duration-300">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h2 className="text-2xl font-semibold">Manage Lessons</h2>
-        <div className="space-x-2">
+        <div className="space-x-2 flex flex-wrap gap-2">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="px-3 py-2 rounded-md bg-slate-900 text-slate-200 
-               border border-slate-700 
-               focus:outline-none focus:border-slate-500"
+            className="px-3 py-2 rounded-md bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-slate-200 border border-gray-300 dark:border-slate-700 focus:outline-none focus:border-slate-500 transition-colors duration-300"
           >
             <option value="">All Categories</option>
             <option value="Personal Growth">Personal Growth</option>
@@ -53,9 +47,7 @@ const ManageLessons = () => {
           <select
             value={privacy}
             onChange={(e) => setPrivacy(e.target.value)}
-            className="px-3 py-2 rounded-md bg-slate-900 text-slate-200 
-               border border-slate-700 
-               focus:outline-none focus:border-slate-500"
+            className="px-3 py-2 rounded-md bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-slate-200 border border-gray-300 dark:border-slate-700 focus:outline-none focus:border-slate-500 transition-colors duration-300"
           >
             <option value="">All Privacy</option>
             <option value="public">Public</option>
@@ -67,8 +59,7 @@ const ManageLessons = () => {
               setCategory("");
               setPrivacy("");
             }}
-            className="px-4 py-2 rounded-md bg-slate-800 text-slate-200 
-               hover:bg-slate-700 transition"
+            className="px-4 py-2 rounded-md bg-gray-200 dark:bg-slate-800 text-gray-900 dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-700 transition-colors duration-300"
           >
             Reset
           </button>

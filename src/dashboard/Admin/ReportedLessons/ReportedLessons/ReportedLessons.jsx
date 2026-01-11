@@ -18,7 +18,9 @@ const ReportedLessons = () => {
 
   return (
     <div className="p-6 min-h-screen">
-      <h1 className="text-2xl font-bold text-white mb-6">Reported Lessons</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        Reported Lessons
+      </h1>
 
       <ReportedLessonsTable handleOpenModal={handleOpenModal} />
 

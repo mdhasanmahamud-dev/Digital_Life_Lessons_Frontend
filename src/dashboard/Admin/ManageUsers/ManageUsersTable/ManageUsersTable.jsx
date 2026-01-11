@@ -20,13 +20,14 @@ const ManageUsersTable = ({ users, refetch }) => {
       console.error(error);
     }
   };
+
   return (
-    <div className="min-h-screen p-6 bg-slate-950 text-slate-100">
+    <div className="min-h-screen p-6  dark:bg-slate-950 text-gray-900 dark:text-slate-100 transition-colors duration-300">
       <div className="max-w-full mx-auto">
-        <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-sm bg-slate-900">
+        <div className="rounded-2xl overflow-hidden border border-gray-300 dark:border-slate-800  bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
           <div className="overflow-x-auto">
             <table className="w-full table-auto text-sm">
-              <thead className="bg-slate-900/60 text-slate-300">
+              <thead className="bg-gray-100 dark:bg-slate-900/60 text-gray-700 dark:text-slate-300">
                 <tr>
                   <th className="p-4 text-left w-12">#</th>
                   <th className="p-4 text-left">Name</th>
@@ -42,7 +43,7 @@ const ManageUsersTable = ({ users, refetch }) => {
                   users.map((user, index) => (
                     <tr
                       key={user._id}
-                      className="border-t border-slate-800 hover:bg-slate-900/40"
+                      className="border-t border-gray-300 dark:border-slate-800 hover:bg-gray-200/40 dark:hover:bg-slate-900/40 transition-colors duration-300"
                     >
                       {/* Serial */}
                       <td className="p-4">{index + 1}</td>
@@ -58,15 +59,15 @@ const ManageUsersTable = ({ users, refetch }) => {
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium capitalize border ${
                             user.role === "admin"
-                              ? "bg-green-100/10 text-green-300 border-green-700"
-                              : "bg-blue-100/10 text-blue-300 border-blue-700"
-                          }`}
+                              ? "bg-green-100/10 dark:bg-green-900/20 text-green-600 dark:text-green-300 border-green-700 dark:border-green-600"
+                              : "bg-blue-100/10 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300 border-blue-700 dark:border-blue-600"
+                          } transition-colors duration-300`}
                         >
                           {user.role}
                         </span>
                       </td>
 
-                      {/* Total Lessons  */}
+                      {/* Total Lessons */}
                       <td className="p-4 text-center">
                         {user.totalLessons || 0}
                       </td>
@@ -78,7 +79,7 @@ const ManageUsersTable = ({ users, refetch }) => {
                           onChange={(e) =>
                             handleRoleChange(user._id, e.target.value)
                           }
-                          className="bg-slate-800 border border-slate-700 text-white text-sm rounded px-2 py-1 w-full"
+                          className="bg-gray-100 dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-sm rounded px-2 py-1 w-full transition-colors duration-300"
                         >
                           <option value="user">User</option>
                           <option value="admin">Admin</option>
@@ -88,7 +89,10 @@ const ManageUsersTable = ({ users, refetch }) => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={6} className="text-center py-6 text-gray-400">
+                    <td
+                      colSpan={6}
+                      className="text-center py-6 text-gray-500 dark:text-gray-400"
+                    >
                       No users found.
                     </td>
                   </tr>
