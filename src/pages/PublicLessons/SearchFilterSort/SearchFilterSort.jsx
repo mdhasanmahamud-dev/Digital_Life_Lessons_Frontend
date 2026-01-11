@@ -12,7 +12,7 @@ const SearchFilterSort = ({
   setSort,
   onReset,
 }) => {
-          
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       onSearch();
@@ -20,7 +20,7 @@ const SearchFilterSort = ({
   };
 
   return (
-    <div className="mb-10 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+    <div className="mb-10 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-800 rounded-2xl p-6 transition-colors duration-300">
       <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
         {/* Search */}
         <div className="flex-1 relative">
@@ -30,13 +30,13 @@ const SearchFilterSort = ({
             onChange={(e) => setLocalSearch(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search lessons by title or keyword..."
-            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 text-slate-200 
-            border border-slate-800 focus:outline-none focus:border-slate-600 
-            placeholder-slate-500"
+            className="w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-slate-200 
+              border border-gray-300 dark:border-slate-800 focus:outline-none focus:border-indigo-500 
+              placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
           />
           <button
             onClick={onSearch}
-            className="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-slate-800 text-slate-200 rounded-md hover:bg-slate-700"
+            className="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-gray-200 dark:bg-slate-800 text-gray-900 dark:text-slate-200 rounded-md hover:bg-gray-300 dark:hover:bg-slate-700 transition-colors duration-300"
           >
             Search
           </button>
@@ -47,8 +47,8 @@ const SearchFilterSort = ({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 text-slate-200 
-            border border-slate-800 focus:outline-none focus:border-slate-600"
+            className="w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-slate-200 
+              border border-gray-300 dark:border-slate-800 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
           >
             <option value="">All Categories</option>
             <option value="Personal Growth">Personal Growth</option>
@@ -63,8 +63,8 @@ const SearchFilterSort = ({
           <select
             value={emotion}
             onChange={(e) => setEmotion(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 text-slate-200 
-            border border-slate-800 focus:outline-none focus:border-slate-600"
+            className="w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-slate-200 
+              border border-gray-300 dark:border-slate-800 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
           >
             <option value="">All Emotions</option>
             <option value="Gratitude">Gratitude</option>
@@ -79,8 +79,8 @@ const SearchFilterSort = ({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 text-slate-200 
-            border border-slate-800 focus:outline-none focus:border-slate-600"
+            className="w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-slate-200 
+              border border-gray-300 dark:border-slate-800 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
           >
             <option value="">Sort By</option>
             <option value="newest">Newest</option>
@@ -92,8 +92,8 @@ const SearchFilterSort = ({
         <div>
           <button
             onClick={onReset}
-            className="px-6 py-2.5 rounded-xl bg-slate-800 text-slate-200 
-            hover:bg-slate-700 transition"
+            className="px-6 py-2.5 rounded-xl bg-gray-200 dark:bg-slate-800 text-gray-900 dark:text-slate-200 
+              hover:bg-gray-300 dark:hover:bg-slate-700 transition-colors duration-300"
           >
             Reset
           </button>

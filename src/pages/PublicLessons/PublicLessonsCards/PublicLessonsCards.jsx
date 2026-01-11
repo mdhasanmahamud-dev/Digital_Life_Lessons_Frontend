@@ -78,9 +78,9 @@ const PublicLessonsCards = () => {
               emotionalTone={lesson.emotionalTone}
               creator={lesson.creator}
               createdAt={lesson.createdAt}
-              image={lesson.image} // Lesson image
-              accessLevel={lesson.accessLevel} // free or premium
-              userData={user} // Logged-in user for premium check
+              image={lesson.image} 
+              accessLevel={lesson.accessLevel} 
+              userData={user} 
               detailsLink={`/lession-details/${lesson._id}`}
               upgradeLink="/upgrade"
               buttonText="View Details"
