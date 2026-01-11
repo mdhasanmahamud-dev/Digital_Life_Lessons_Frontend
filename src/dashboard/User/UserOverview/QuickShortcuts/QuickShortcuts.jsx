@@ -9,12 +9,12 @@ const QuickShortcuts = () => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-3 text-white">Quick Shortcuts</h3>
+      <h3 className="text-lg font-semibold mb-3  dark:text-white">Quick Shortcuts</h3>
       <ul className="space-y-2">
         {shortcuts.map((sc, idx) => (
           <li key={idx} className="flex items-center gap-3">
-            <span className="text-xs text-gray-400">•</span>
-            <NavLink to={sc.path} className="text-sm text-gray-300 hover:underline">
+            <span className="text-xs  dark:text-gray-400">•</span>
+            <NavLink to={sc.path} className="text-sm text-black dark:text-gray-300 hover:underline">
               {sc.name}
             </NavLink>
           </li>

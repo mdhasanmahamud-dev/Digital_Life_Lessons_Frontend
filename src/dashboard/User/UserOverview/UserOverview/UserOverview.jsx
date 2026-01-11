@@ -5,17 +5,17 @@ import AnalyticsChart from "../AnalyticsChart/AnalyticsChart";
 
 function UserOverview() {
   return (
-    <div className="min-h-screen bg-slate-950 p-6">
+    <div className="min-h-screen dark:bg-slate-950 p-6">
       <div className="container max-w-7xl mx-auto">
         {/* Stat cards */}
         <StatCards />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-700">
+          <div className="lg:col-span-2 dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-700">
             <RecentLessons />
           </div>
 
           {/* Quick Shortcuts & Favorites */}
-          <div className="bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-700">
+          <div className="dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-700">
             <QuickShortcuts />
           </div>
         </div>

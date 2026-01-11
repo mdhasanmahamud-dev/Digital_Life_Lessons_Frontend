@@ -27,11 +27,10 @@ const AnalyticsPieChart = () => {
   ];
 
   return (
-    <div className="bg-slate-800 rounded-2xl p-6 border border-gray-700">
-      <h3 className="text-lg font-semibold text-white mb-4">
+    <div className="dark:bg-slate-800 rounded-2xl p-6 border border-gray-700">
+      <h3 className="text-lg font-semibold dark:text-white mb-4">
         Your Contributions
       </h3>
-
       <ResponsiveContainer width="100%" height={200}>
         <PieChart>
           <Pie

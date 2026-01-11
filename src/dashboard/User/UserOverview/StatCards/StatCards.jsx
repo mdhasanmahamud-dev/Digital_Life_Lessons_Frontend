@@ -23,7 +23,7 @@ const StatCards = () => {
       {stats.map((s, index) => (
         <div
           key={s.id}
-          className={`bg-slate-800 rounded-2xl p-4 shadow-sm border ${
+          className={`dark:bg-slate-800 rounded-2xl p-4 shadow-sm border ${
             index === 0
               ? "hover:border-yellow-500 transition-all duration-300 ease-in-out"
               : index === 1
@@ -35,12 +35,12 @@ const StatCards = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-gray-400">{s.label}</p>
-              <p className="text-2xl font-semibold text-white mt-2">
+              <p className="text-xs text-black dark:text-gray-400">{s.label}</p>
+              <p className="text-2xl text-zinc-950  font-semibold dark:text-white mt-2">
                 {s.value}
               </p>
             </div>
-            <div className="text-gray-400">{s.icon}</div>
+            <div className="dark:text-gray-400">{s.icon}</div>
           </div>
         </div>
       ))}
