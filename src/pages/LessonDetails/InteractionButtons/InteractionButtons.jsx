@@ -38,10 +38,10 @@ const InteractionButtons = ({ lessonId, setLike }) => {
     if (!user) return toast("Please login first!");
     try {
       const response = await axiosSecure.patch(`/lessons/like/${lessonId}`);
-      console.log(response)
+      console.log(response);
       if (response.data.success) {
         toast.success("Liked!");
-        setLike(response?.data?.like)
+        setLike(response?.data?.like);
       }
     } catch (error) {
       const message = error?.response?.data?.message || "Failed to like";
@@ -50,29 +50,33 @@ const InteractionButtons = ({ lessonId, setLike }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 border-t border-slate-800 pt-6">
+    <div className="flex flex-wrap gap-4 border-t border-gray-200 dark:border-slate-800 pt-6">
+      {/* Save Button */}
       <button
         disabled={isFavorite}
-        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
         onClick={handleFavorite}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
       >
         <FaBookmark /> {isFavorite ? "Saving..." : "Save"}
       </button>
 
+      {/* Report Button */}
       <button
         onClick={() => setIsReportOpen(true)}
-        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
       >
         <FaFlag /> Report
       </button>
 
+      {/* Like Button */}
       <button
         onClick={() => handleUpdateLike()}
-        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 transition text-sm font-medium cursor-pointer"
       >
         <FaHeart /> Like
       </button>
-      <Action icon={FaShareAlt} label="Share" />
+
+      {/* Report Modal */}
       <ReportModal
         lessonId={lessonId}
         isOpen={isReportOpen}
@@ -81,11 +85,5 @@ const InteractionButtons = ({ lessonId, setLike }) => {
     </div>
   );
 };
-
-const Action = ({ icon: Icon, label }) => (
-  <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition text-sm font-medium">
-    <Icon /> {label}
-  </button>
-);
 
 export default InteractionButtons;

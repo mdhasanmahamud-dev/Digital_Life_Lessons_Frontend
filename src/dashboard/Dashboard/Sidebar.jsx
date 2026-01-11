@@ -77,14 +77,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       )}
       <div
         className={`
-          fixed top-0 left-0 z-50
-          h-screen bg-slate-900 text-gray-200 p-6
-          border-r border-gray-800
-          transition-all duration-300 ease-in-out transform
-          ${isOpen ? "w-64 translate-x-0" : "w-0 -translate-x-full"}
-          md:static md:w-64 md:translate-x-0
-          overflow-hidden
-        `}
+        fixed top-0 left-0 z-50
+        h-screen bg-slate-900 text-gray-200 p-6
+        border-r border-gray-800
+        transition-all duration-300 ease-in-out transform
+        ${isOpen ? "w-64 translate-x-0" : "w-0 -translate-x-full"}
+        md:static md:w-64 md:translate-x-0
+        overflow-y-auto  
+      `}
       >
         <h2 className="text-2xl font-bold mb-3 text-center text-white">
           {role === "admin" ? "Admin" : "Dashboard"}{" "}

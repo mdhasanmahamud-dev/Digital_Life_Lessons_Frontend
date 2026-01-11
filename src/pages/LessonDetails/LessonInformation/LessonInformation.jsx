@@ -4,11 +4,11 @@ const LessonInformation = ({ lesson }) => {
   return (
     <div className="space-y-5">
       {/* ===== Title ===== */}
-      <h1 className="text-3xl md:text-4xl font-bold text-white">
+      <h1 className="text-3xl md:text-4xl font-bold dark:text-white">
         {lesson.title}
       </h1>
       {/* ===== Meta Info Row ===== */}
-      <div className="flex flex-wrap gap-5 text-sm text-slate-400">
+      <div className="flex flex-wrap gap-5 text-sm dark:text-slate-400">
         {/* Category */}
         <span className="text-xs border border-slate-700 px-4 py-1 rounded-full outline-none capitalize">
           {lesson.category}
@@ -26,11 +26,11 @@ const LessonInformation = ({ lesson }) => {
       </div>
 
       {/* ===== Lesson Description ===== */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-8">
-        <h2 className="text-xl font-semibold text-white mb-4">
+      <div className="dark:bg-slate-900 border border-slate-800 rounded-xl p-8">
+        <h2 className="text-xl font-semibold dark:text-white mb-4">
           Lesson Insight
         </h2>
-        <p className="text-slate-400 leading-relaxed">{lesson.description}</p>
+        <p className="dark:text-slate-400 leading-relaxed">{lesson.description}</p>
       </div>
     </div>
   );

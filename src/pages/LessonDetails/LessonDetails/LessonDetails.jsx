@@ -39,7 +39,7 @@ const LessonDetails = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200">
+    <div className="min-h-screen dark:bg-slate-950 text-black dark:text-slate-200">
       <div className="max-w-6xl mx-auto px-4 py-14 space-y-14">
         <LessonInformation lesson={lesson} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">

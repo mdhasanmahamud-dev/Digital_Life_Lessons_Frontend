@@ -3,15 +3,15 @@ import { Link } from "react-router";
 
 const RecommendedLessonsCard = ({ lesson }) => {
   return (
-    <div className="bg-slate-900 rounded-xl p-5 border border-slate-800 hover:shadow-lg hover:border-blue-600 transition-all duration-300 flex flex-col">
+    <div className="dark:bg-slate-900 rounded-xl p-5 border border-slate-800 hover:shadow-lg hover:border-blue-600 transition-all duration-300 flex flex-col">
       
       {/* Lesson Title */}
-      <h3 className="font-bold text-white text-lg line-clamp-2 mb-2">
+      <h3 className="font-bold dark:text-white text-lg line-clamp-2 mb-2">
         {lesson.title}
       </h3>
 
       {/* Truncated Description (flex-grow) */}
-      <p className="text-sm text-slate-400 grow line-clamp-3">
+      <p className="text-sm dark:text-slate-400 grow line-clamp-3">
         {lesson?.description}
       </p>
 

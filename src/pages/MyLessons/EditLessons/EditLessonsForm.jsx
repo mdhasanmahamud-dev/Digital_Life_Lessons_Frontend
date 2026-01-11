@@ -29,7 +29,11 @@ const EditLessonsForm = () => {
   });
 
   // ------------------- Fetch Single Lesson ----------------------------//
-  const {data: lesson,isLoading,refetch,} = useQuery({
+  const {
+    data: lesson,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["Lesson", id],
     queryFn: async () => {
       if (!id) return [];
@@ -75,9 +79,9 @@ const EditLessonsForm = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen bg-slate-950 p-6">
-      <div className="max-w-5xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-700">
-        <h1 className="text-2xl font-bold text-white mb-6 text-center">
+    <div className="min-h-screen dark:bg-slate-950 p-6">
+      <div className="max-w-5xl mx-auto dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-700">
+        <h1 className="text-2xl font-bold text-black dark:text-white mb-6 text-center">
           Update Lesson
         </h1>
 
@@ -87,11 +91,13 @@ const EditLessonsForm = () => {
         >
           {/* Title */}
           <div className="lg:col-span-2">
-            <label className="text-white block mb-1">Lesson Title</label>
+            <label className="block mb-1 text-gray-800 dark:text-white">
+              Lesson Title
+            </label>
             <input
               type="text"
               {...register("title", { required: "Lesson Title is required" })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             />
             {errors.title && (
               <p className="text-red-500 text-sm">{errors.title.message}</p>
@@ -100,7 +106,7 @@ const EditLessonsForm = () => {
 
           {/* Description */}
           <div className="lg:col-span-2">
-            <label className="text-white block mb-1">
+            <label className="block mb-1 text-gray-800 dark:text-white">
               Full Description / Story / Insight
             </label>
             <textarea
@@ -108,7 +114,7 @@ const EditLessonsForm = () => {
               {...register("description", {
                 required: "Description is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             />
             {errors.description && (
               <p className="text-red-500 text-sm">
@@ -119,10 +125,12 @@ const EditLessonsForm = () => {
 
           {/* Category */}
           <div>
-            <label className="text-white block mb-1">Category</label>
+            <label className="block mb-1 text-gray-800 dark:text-white">
+              Category
+            </label>
             <select
               {...register("category", { required: "Category is required" })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             >
               <option value="">Select Category</option>
               <option value="Personal Growth">Personal Growth</option>
@@ -135,12 +143,14 @@ const EditLessonsForm = () => {
 
           {/* Emotional Tone */}
           <div>
-            <label className="text-white block mb-1">Emotional Tone</label>
+            <label className="block mb-1 text-gray-800 dark:text-white">
+              Emotional Tone
+            </label>
             <select
               {...register("emotionalTone", {
                 required: "Emotional Tone is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             >
               <option value="">Select Emotional Tone</option>
               <option value="Motivational">Motivational</option>
@@ -152,12 +162,14 @@ const EditLessonsForm = () => {
 
           {/* Privacy */}
           <div>
-            <label className="text-white block mb-1">Privacy</label>
+            <label className="block mb-1 text-gray-800 dark:text-white">
+              Privacy
+            </label>
             <select
               {...register("privacy", {
                 required: "Privacy selection is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             >
               <option value="public">Public</option>
               <option value="private">Private</option>
@@ -166,12 +178,14 @@ const EditLessonsForm = () => {
 
           {/* Access Level */}
           <div>
-            <label className="text-white block mb-1">Access Level</label>
+            <label className="block mb-1 text-gray-800 dark:text-white">
+              Access Level
+            </label>
             <select
               {...register("accessLevel", {
                 required: "Access Level is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-gray-300 dark:border-gray-700"
             >
               <option value="Free">Free</option>
               <option value="premium">Premium</option>
@@ -183,7 +197,7 @@ const EditLessonsForm = () => {
             <button
               disabled={updating}
               type="submit"
-              className="w-full bg-blue-800 text-white px-4 py-2 rounded-sm shadow cursor-pointer"
+              className="w-full bg-blue-800 dark:bg-blue-700 text-white px-4 py-2 rounded-sm shadow cursor-pointer hover:bg-blue-900 dark:hover:bg-blue-600 transition"
             >
               {updating ? "Updating..." : "Update Lesson"}
             </button>

@@ -7,16 +7,20 @@ import { useState } from "react";
 const DashboardLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
+    <div className="h-screen flex flex-col overflow-hidden"> 
+      {/* Mobile Navbar বা Header */}
       <Mobile setIsOpen={setIsOpen} isOpen={isOpen}/>
-      <div className="bg-gray-100 dark:bg-slate-950 min-h-screen flex">
+      
+      <div className="flex flex-1 overflow-hidden bg-gray-100 dark:bg-slate-950">
+        {/* Sidebar এখানে তার জায়গায় স্থির থাকবে */}
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-        <main className="overflow-hidden flex-1  p-6">
+        
+        {/* Main Content অংশটি স্ক্রল হবে */}
+        <main className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-slate-700">
           <Outlet />
         </main>
       </div>
     </div>
   );
 };
-
 export default DashboardLayout;

@@ -21,7 +21,7 @@ const RecommendedLessons = ({ lessonId }) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-white">Recommended Lessons</h2>
+      <h2 className="text-lg font-semibold dark:text-white">Recommended Lessons</h2>
       <div className="grid md:grid-cols-2 gap-4">
         {data.map((lesson, index) => (
           <RecommendedLessonsCard key={index} lesson={lesson} />
