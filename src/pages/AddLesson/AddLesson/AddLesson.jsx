@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useUserHook from "../../../hooks/useUserHook";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,14 +7,14 @@ import { useNavigate } from "react-router";
 import useLessonHook from "../../../hooks/useLessonHook";
 import Lottie from "lottie-react";
 import successAnimation from "../../../assets/success.json";
-import { useState } from "react";
 
 function AddLesson() {
   const { user } = useUserHook();
   const { lessonCountRefetch } = useLessonHook();
   const axiosSecure = useAxiosSecure();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -39,30 +39,33 @@ function AddLesson() {
       toast.error(response.data.message);
     }
   };
+
   return (
-    <div className="min-h-screen bg-slate-950 p-6 relative">
+    <div className="min-h-screen  dark:bg-slate-950 p-6 transition-colors duration-300 relative">
       {showSuccess && (
-        <div className="fixed inset-0 bg-black/70 flex  justify-center z-50">
+        <div className="fixed inset-0 bg-black/70 flex justify-center z-50">
           <div className="w-72 text-center">
             <Lottie animationData={successAnimation} loop={true} />
           </div>
         </div>
       )}
-      <div className="max-w-5xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-700">
-        <h1 className="text-2xl font-bold text-white mb-6 text-center">
+      <div className="max-w-5xl mx-auto bg-gray-50 dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-300 dark:border-gray-700 transition-colors duration-300">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           Add Lesson
         </h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
-          {/* Lesson Title (Full width) */}
+          {/* Lesson Title */}
           <div className="lg:col-span-2">
-            <label className="text-white block mb-1">Lesson Title</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Lesson Title
+            </label>
             <input
               type="text"
               {...register("title", { required: "Lesson Title is required" })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             />
             {errors.title && (
               <p className="text-red-500 text-sm mt-1">
@@ -71,9 +74,9 @@ function AddLesson() {
             )}
           </div>
 
-          {/* Full Description (Full width) */}
+          {/* Description */}
           <div className="lg:col-span-2">
-            <label className="text-white block mb-1">
+            <label className="block mb-1 text-gray-900 dark:text-white">
               Full Description / Story / Insight
             </label>
             <textarea
@@ -81,7 +84,7 @@ function AddLesson() {
                 required: "Description is required",
               })}
               rows={5}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             />
             {errors.description && (
               <p className="text-red-500 text-sm mt-1">
@@ -92,10 +95,12 @@ function AddLesson() {
 
           {/* Category */}
           <div>
-            <label className="text-white block mb-1">Category</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Category
+            </label>
             <select
               {...register("category", { required: "Category is required" })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             >
               <option value="">Select Category</option>
               <option value="Personal Growth">Personal Growth</option>
@@ -113,12 +118,14 @@ function AddLesson() {
 
           {/* Emotional Tone */}
           <div>
-            <label className="text-white block mb-1">Emotional Tone</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Emotional Tone
+            </label>
             <select
               {...register("emotionalTone", {
                 required: "Emotional Tone is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             >
               <option value="">Select Emotional Tone</option>
               <option value="Motivational">Motivational</option>
@@ -135,12 +142,14 @@ function AddLesson() {
 
           {/* Privacy */}
           <div>
-            <label className="text-white block mb-1">Privacy</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Privacy
+            </label>
             <select
               {...register("privacy", {
                 required: "Privacy selection is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             >
               <option value="public">Public</option>
               <option value="private">Private</option>
@@ -154,12 +163,14 @@ function AddLesson() {
 
           {/* Access Level */}
           <div>
-            <label className="text-white block mb-1">Access Level</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Access Level
+            </label>
             <select
               {...register("accessLevel", {
                 required: "Access Level is required",
               })}
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             >
               <option value="Free">Free</option>
               <option
@@ -176,14 +187,16 @@ function AddLesson() {
             )}
           </div>
 
-          {/* Image URL (Full width) */}
+          {/* Image URL */}
           <div className="lg:col-span-2">
-            <label className="text-white block mb-1">Image URL</label>
+            <label className="block mb-1 text-gray-900 dark:text-white">
+              Image URL
+            </label>
             <input
               type="text"
               {...register("image", { required: "Image URL is required" })}
               placeholder="https://example.com/image.jpg"
-              className="w-full p-2 rounded-lg bg-slate-900 text-white border border-gray-700"
+              className="w-full p-2 rounded-lg bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 transition-colors duration-300"
             />
             {errors.image && (
               <p className="text-red-500 text-sm mt-1">
@@ -192,11 +205,11 @@ function AddLesson() {
             )}
           </div>
 
-          {/* Submit button (Full width) */}
+          {/* Submit button */}
           <div className="lg:col-span-2">
             <button
               type="submit"
-              className="w-full bg-blue-800 text-white px-4 py-2 rounded-sm shadow cursor-pointer"
+              className="w-full bg-blue-800 dark:bg-blue-700 text-white px-4 py-2 rounded-sm shadow cursor-pointer hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-300"
             >
               Submit Lesson
             </button>

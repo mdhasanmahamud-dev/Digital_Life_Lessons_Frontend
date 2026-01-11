@@ -64,7 +64,7 @@ const PublicLessonsCards = () => {
       />
 
       {/* Lessons Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 mt-6">
         {data?.lessons?.length === 0 ? (
           <div className="col-span-full text-center py-20 text-slate-400">
             No public lessons found

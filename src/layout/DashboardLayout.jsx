@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   return (
     <div>
       <Mobile setIsOpen={setIsOpen} isOpen={isOpen}/>
-      <div className="bg-slate-950 min-h-screen flex">
+      <div className="bg-gray-100 dark:bg-slate-950 min-h-screen flex">
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         <main className="overflow-hidden flex-1  p-6">
           <Outlet />

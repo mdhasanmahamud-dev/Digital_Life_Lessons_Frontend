@@ -27,7 +27,7 @@ const ContentCard = ({
       className="
         group relative
         bg-white dark:bg-slate-800
-        rounded-2xl overflow-hidden
+        rounded-md overflow-hidden
         border border-gray-200 dark:border-slate-800
         flex flex-col justify-between
         transition-transform duration-300 ease-out
@@ -37,7 +37,7 @@ const ContentCard = ({
     >
       {/* Image */}
       {image && (
-        <div className="w-full h-48 overflow-hidden rounded-t-2xl">
+        <div className="w-full h-48 overflow-hidden rounded-t-md">
           <img
             src={image}
             alt={title}
@@ -60,7 +60,7 @@ const ContentCard = ({
         </h2>
 
         {/* Category + Tone */}
-        <div className="flex items-center gap-3 mb-5 flex-wrap">
+        <div className="flex items-center gap-2 mb-5 flex-wrap">
           {category && (
             <span
               className="
