@@ -63,23 +63,23 @@ const Navbar = () => {
             ))}
         </ul>
 
-        {/* User & Theme Toggle */}
-        {user ? (
-          <div className="relative hidden md:block">
-            <div className="flex items-center gap-3">
-              {/* Dark Mode Toggle */}
-              <button
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors duration-300 cursor-pointer"
-              >
-                {theme === "light" ? (
-                  <CiDark className="text-2xl text-black" />
-                ) : (
-                  <CiLight className="text-2xl text-white" />
-                )}
-              </button>
+        {/* User & Theme Toggle + Dark Mode (Always Visible) */}
+        <div className="flex items-center gap-3">
+          {/* Dark Mode Toggle (Always Visible) */}
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors duration-300 cursor-pointer"
+          >
+            {theme === "light" ? (
+              <CiDark className="text-2xl text-black" />
+            ) : (
+              <CiLight className="text-2xl text-white" />
+            )}
+          </button>
 
-              {/* Profile */}
+          {/* User Profile or Login */}
+          {user ? (
+            <div className="relative">
               <div
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 border border-neutral-300 dark:border-gray-600 flex items-center gap-2 rounded-full cursor-pointer hover:shadow-md transition"
@@ -90,17 +90,17 @@ const Navbar = () => {
                   alt="profile"
                 />
               </div>
+              {isOpen && <ProfileDropDown />}
             </div>
-            {isOpen && <ProfileDropDown />}
-          </div>
-        ) : (
-          <NavLink
-            to="/login"
-            className="px-4 py-2 border bg-indigo-600 text-white rounded hover:bg-indigo-700 hidden md:flex"
-          >
-            Login
-          </NavLink>
-        )}
+          ) : (
+            <NavLink
+              to="/login"
+              className="px-4 py-2 border bg-indigo-600 text-white rounded hover:bg-indigo-700"
+            >
+              Login
+            </NavLink>
+          )}
+        </div>
 
         {/* Mobile Menu */}
         <div className="md:hidden relative">
