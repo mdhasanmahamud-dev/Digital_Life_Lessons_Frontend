@@ -99,12 +99,12 @@ const ReportedLessonsTable = ({ handleOpenModal }) => {
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+        <tbody className="divide-y  divide-gray-200 dark:divide-slate-700">
           {reports.length > 0 ? (
             reports.map((report) => (
               <tr
                 key={report.id}
-                className="hover:bg-gray-200 dark:hover:bg-slate-900/40 transition-colors duration-300"
+                className="bg-gray-50 hover:bg-gray-200 dark:hover:bg-slate-900/40 transition-colors duration-300"
               >
                 <td className="px-6 py-4 text-gray-900 dark:text-white">
                   {report?.lessonTitle}
