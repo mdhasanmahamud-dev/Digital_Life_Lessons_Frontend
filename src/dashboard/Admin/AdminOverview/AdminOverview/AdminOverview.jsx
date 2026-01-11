@@ -4,7 +4,7 @@ import SimpleAnalyticsGraph from "../SimpleAnalyticsGraph/SimpleAnalyticsGraph";
 
 const AdminOverview = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 ">
+    <div className="min-h-screen dark:bg-slate-950 text-slate-100 p-6 ">
       <div className="container max-w-7xl mx-auto space-y-10">
         <AnalyticsCards />
         <ActiveContributors />

@@ -24,8 +24,8 @@ const SimpleAnalyticsGraph = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-      <h3 className="text-xl font-semibold mb-4">Platform Growth</h3>
+    <div className="dark:bg-slate-900 border border-slate-800 rounded-2xl p-6">
+      <h3 className="text-xl text-zinc-900 dark:text-gray-50 font-semibold mb-4">Platform Growth</h3>
 
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data}>
