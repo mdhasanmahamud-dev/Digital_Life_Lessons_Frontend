@@ -43,15 +43,15 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center  py-10 px-7 ">
-      <div className="bg-white rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+      <div className="bg-white dark:bg-slate-900 rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300">
+        <h2 className="text-3xl font-bold text-center text-black dark:text-gray-100 mb-6">
           Login to Your Account
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Email */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-black dark:text-gray-100 font-medium mb-1">
               Email
             </label>
             <input
@@ -59,7 +59,7 @@ const Login = () => {
               type="email"
               autoComplete="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
+              className="w-full px-4 py-2 border-b dark:border-slate-300 border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
             />
             {errors.email && (
               <span className="text-red-500 text-sm">
@@ -70,7 +70,7 @@ const Login = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block text-black dark:text-gray-100 font-medium mb-1">
               Password
             </label>
             <div className="relative">
@@ -90,7 +90,7 @@ const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
                 autoComplete="current-password"
-                className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
+                className="w-full px-4 py-2 border-b dark:border-slate-300 border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
               />
 
               <span
@@ -134,7 +134,7 @@ const Login = () => {
         </form>
 
         {/* Login Redirect */}
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-sm dark:text-gray-300 mt-4">
           Don’t have an account yet?{" "}
           <Link
             to="/register"

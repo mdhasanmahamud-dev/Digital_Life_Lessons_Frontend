@@ -69,8 +69,8 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center  py-10 px-7">
-      <div className="bg-white rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300 shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+      <div className="bg-white dark:bg-slate-900 rounded-md p-8 w-full max-w-md md:max-w-lg border border-gray-300 shadow-lg">
+        <h2 className="text-3xl font-bold text-center dark:text-gray-100 mb-6">
           Create an Account
         </h2>
 
@@ -78,12 +78,12 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Name</label>
+            <label className="block dark:text-gray-100 text-black font-medium mb-1">Name</label>
             <input
               {...register("name", { required: true })}
               type="text"
               placeholder="Enter your name"
-              className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
+              className="w-full px-4 py-2 border-b dark:border-slate-300 border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
             />
             {errors.name && (
               <span className="text-red-500 text-sm">Name is required</span>
@@ -92,14 +92,14 @@ const Register = () => {
 
           {/* Email */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block dark:text-gray-100 text-white font-medium mb-1">
               Email
             </label>
             <input
               {...register("email", { required: true })}
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
+              className="w-full px-4 py-2 border-b dark:border-slate-300 border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
             />
             {errors.email && (
               <span className="text-red-500 text-sm">Email is required</span>
@@ -108,7 +108,7 @@ const Register = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label className="block dark:text-gray-100 text-white font-medium mb-1">
               Password
             </label>
             <div className="relative">
@@ -128,7 +128,7 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="***********"
                 autoComplete="current-password"
-                className="w-full px-4 py-2 border-b border-slate-950 bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
+                className="w-full px-4 py-2 border-b dark:border-slate-300 border-slate-950  bg-transparent focus:outline-none focus:border-blue-500 transition-colors duration-200"
               />
 
               <span
@@ -188,7 +188,7 @@ const Register = () => {
         </form>
 
         {/* Login Redirect */}
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-sm dark:text-gray-300 text-black mt-4">
           Already have an account?{" "}
           <Link
             to="/login"

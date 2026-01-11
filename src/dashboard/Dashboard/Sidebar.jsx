@@ -41,6 +41,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       path: "/dashboard/add-lesson",
       icon: <FiPlusCircle />,
     },
+    { name: "My Lesson", path: "/dashboard/my-lession", icon: <FiBookOpen /> },
     {
       name: "Manage Users",
       path: "/dashboard/manage-users",
