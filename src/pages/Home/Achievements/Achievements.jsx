@@ -40,7 +40,7 @@ const stats = [
 
 const Achievements = () => {
   return (
-    <section className="relative bg-slate-900 text-white py-24 px-6 md:px-16 overflow-hidden">
+    <section className="relative bg-gray-100 dark:bg-slate-900 text-white py-24 px-6 md:px-16 overflow-hidden">
       {/* Decorative blurred circles */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-linear-to-r from-blue-700 to-blue-400 rounded-full opacity-20 blur-3xl"></div>
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-linear-to-r from-pink-700 to-pink-400 rounded-full opacity-20 blur-3xl"></div>
@@ -49,10 +49,10 @@ const Achievements = () => {
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-black dark:text-gray-100">
             Our Achievements
           </h2>
-          <p className="text-slate-300 text-lg md:text-xl">
+          <p className="text-slate-900 dark:text-gray-200 text-lg md:text-xl">
             Milestones that showcase our dedication, expertise, and impact in the learning community.
           </p>
         </div>

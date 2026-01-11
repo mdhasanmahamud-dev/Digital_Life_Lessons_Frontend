@@ -56,30 +56,37 @@ const TestimonialsCard = () => {
     <Swiper
       slidesPerView={3}
       spaceBetween={24}
-      loop={true} // 🔁 infinite loop
+      loop={true}
       autoplay={{
-        delay: 3000, // 3 seconds
-        disableOnInteraction: false, // user touch করলে থামবে না
+        delay: 3000,
+        disableOnInteraction: false,
       }}
       pagination={{ clickable: true }}
       modules={[Pagination, Autoplay]}
       breakpoints={{
-        0: {
-          slidesPerView: 1,
-        },
-        640: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
+        0: { slidesPerView: 1 },
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       }}
       className="mySwiper"
     >
       {testimonials.map((item) => (
         <SwiperSlide key={item.id}>
-          <div className="h-full rounded-lg border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-            <p className="text-sm text-zinc-400 leading-relaxed">
+          <div
+            className="
+              h-full rounded-lg p-6 shadow-lg border
+              bg-white border-gray-200
+              dark:bg-zinc-950 dark:border-zinc-800
+              transition-colors duration-300
+            "
+          >
+            <p
+              className="
+                text-sm leading-relaxed
+                text-gray-600
+                dark:text-zinc-400
+              "
+            >
               “{item.review}”
             </p>
 
@@ -87,14 +94,33 @@ const TestimonialsCard = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="h-12 w-12 rounded-full object-cover border border-zinc-700"
+                className="
+                  h-12 w-12 rounded-full object-cover border
+                  border-gray-300
+                  dark:border-zinc-700
+                "
               />
 
               <div>
-                <h4 className="text-sm font-medium text-white">
+                <h4
+                  className="
+                    text-sm font-medium
+                    text-gray-900
+                    dark:text-white
+                  "
+                >
                   {item.name}
                 </h4>
-                <p className="text-xs text-zinc-500">{item.role}</p>
+
+                <p
+                  className="
+                    text-xs
+                    text-gray-500
+                    dark:text-zinc-500
+                  "
+                >
+                  {item.role}
+                </p>
 
                 <div className="mt-1 flex gap-1">
                   {[...Array(item.rating)].map((_, i) => (
