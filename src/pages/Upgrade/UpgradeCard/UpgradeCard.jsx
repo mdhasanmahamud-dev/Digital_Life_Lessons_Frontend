@@ -62,16 +62,19 @@ const UpgradeCard = () => {
       toast.error("Payment request failed.");
     }
   };
+
   return (
-    <div className=" py-8 px-4 sm:px-6 lg:px-8">
+    <div className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
       <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6 max-w-4xl mx-auto">
         {/* Free Plan Card */}
-        <div className="flex-1 bg-slate-900 hover:bg-slate-800 transition-all duration-300 ease-in-out border border-gray-700 rounded-xl shadow-md p-6 sm:p-8 flex flex-col">
-          <h3 className="text-2xl font-bold text-white mb-2">Free</h3>
+        <div className="flex-1 bg-gray-100 dark:bg-slate-900 hover:bg-gray-200 dark:hover:bg-slate-800 transition-all duration-300 ease-in-out border border-gray-300 dark:border-gray-700 rounded-xl shadow-md p-6 sm:p-8 flex flex-col">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            Free
+          </h3>
 
-          <p className="text-4xl font-extrabold text-white mb-6">
+          <p className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
             $0
-            <span className="text-base font-normal text-gray-100">
+            <span className="text-base font-normal text-gray-600 dark:text-gray-300">
               {" "}
               / month
             </span>
@@ -79,12 +82,12 @@ const UpgradeCard = () => {
 
           {/* Action Button */}
           <div className="mb-8">
-            <button className="w-full py-2.5 text-center text-sm font-semibold text-gray-800 bg-gray-200 rounded-lg cursor-default">
+            <button className="w-full py-2.5 text-center text-sm font-semibold text-gray-800 dark:text-gray-200 bg-gray-300 dark:bg-gray-700 rounded-lg cursor-default">
               Current Plan
             </button>
           </div>
 
-          <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4 border-b pb-2">
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-wider mb-4 border-b pb-2">
             Features Included
           </h4>
 
@@ -97,17 +100,19 @@ const UpgradeCard = () => {
         </div>
 
         {/* Premium Plan Card */}
-        <div className="flex-1 hover:bg-slate-900 bg-slate-800 transition-all duration-300 ease-in-out border border-indigo-500 rounded-xl shadow-xl p-6 sm:p-8 flex flex-col relative">
+        <div className="flex-1 bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out border border-indigo-500 rounded-xl shadow-xl p-6 sm:p-8 flex flex-col relative">
           {/* Recommended Badge */}
           <div className="absolute top-0 right-0 mr-4 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
             Recommended
           </div>
 
-          <h3 className="text-2xl font-bold text-indigo-600 mb-2">Premium</h3>
+          <h3 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">
+            Premium
+          </h3>
 
-          <p className="text-4xl font-extrabold  text-white mb-6">
+          <p className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
             $1500
-            <span className="text-base font-normal text-gray-500">
+            <span className="text-base font-normal text-gray-600 dark:text-gray-400">
               / Lifetime access
             </span>
           </p>
@@ -115,20 +120,20 @@ const UpgradeCard = () => {
           {/* Action Button */}
           <div className="mb-8">
             {userData?.isPremium ? (
-              <button className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 transition">
+              <button className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 dark:bg-indigo-500 rounded-lg shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition">
                 You are already a Premium Member
               </button>
             ) : (
               <button
                 onClick={handlePremiumPayment}
-                className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 transition cursor-pointer"
+                className="w-full py-2.5 text-center text-sm font-semibold text-white bg-indigo-600 dark:bg-indigo-500 rounded-lg shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition cursor-pointer"
               >
                 Upgrade to Premium
               </button>
             )}
           </div>
 
-          <h4 className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-4 border-b pb-2">
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-400 uppercase tracking-wider mb-4 border-b pb-2">
             All Features
           </h4>
 
@@ -139,7 +144,7 @@ const UpgradeCard = () => {
             ))}
           </ul>
 
-          <p className="mt-6 text-xs text-gray-500">
+          <p className="mt-6 text-xs text-gray-500 dark:text-gray-400">
             Billed annually. Unlimited usage subject to fair use policy.
           </p>
         </div>
